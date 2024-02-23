@@ -3,7 +3,23 @@ import 'package:sarmini_mbokdhe/models/order_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
 class HistoryController extends BaseController {
+  final masterHistories = <OrderDatum>[].obs;
   final histories = <OrderDatum>[].obs;
+  final selectedType = 'All'.obs;
+  final types = <String>['All', 'Unpaid', 'Waiting', 'Dikirim'];
+
+  setSelectedType({required String type}) {
+    selectedType(type);
+
+    if (type == 'All') {
+      histories(masterHistories);
+      return;
+    }
+
+    histories(
+      masterHistories.where((p0) => p0.status == type).toList(),
+    );
+  }
 
   getOrders() async {
     isLoading(true);
@@ -14,7 +30,9 @@ class HistoryController extends BaseController {
           .post(endpoint: '/orders', body: {'userId': user.value!.id});
       final history = OrderResponse.fromJson(historyResponse);
 
+      masterHistories(history.data);
       histories(history.data);
+
       isLoading(false);
     } catch (e) {
       isLoading(false);

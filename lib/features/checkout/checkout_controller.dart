@@ -195,6 +195,13 @@ class CheckoutController extends BaseController {
           'productId': selectedProduct.value!.id,
           'qty': detailController.qty.value,
         });
+        final response =
+            await ApiProvider().post(endpoint: '/users/deduct', body: {
+          'userId': user.value!.id,
+          'amount': _calculateTotal(),
+        });
+        final userData = UserResponse.fromJson(response);
+        await setCurrentLoggedInUser(userData.user);
 
         Get.offAll(
           () => const DashboardScreen(),
@@ -206,7 +213,6 @@ class CheckoutController extends BaseController {
       isBuyLoading(false);
     } catch (e) {
       isBuyLoading(false);
-      print(e);
       Utils.showGetSnackbar(e.toString(), false);
     }
   }

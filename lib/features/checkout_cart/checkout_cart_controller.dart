@@ -238,10 +238,13 @@ class CheckoutCartController extends BaseController {
   _reduceBalance() async {
     final user = await getCurrentLoggedInUser();
     if (selectedPayment.value == 'Saldo') {
-      await ApiProvider().post(endpoint: '/users/deduct', body: {
+      final response =
+          await ApiProvider().post(endpoint: '/users/deduct', body: {
         'userId': user.value!.id,
         'amount': _calculateTotal(),
       });
+      final userData = UserResponse.fromJson(response);
+      await setCurrentLoggedInUser(userData.user);
     }
   }
 

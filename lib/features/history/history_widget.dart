@@ -18,27 +18,55 @@ class HistoryWidget extends GetView<HistoryController> {
         title: const Text('Riwayat Pesanan'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.dp),
+        padding: EdgeInsets.only(right: 16.dp, left: 16.dp),
         child: Obx(
           () => Skeletonizer(
             enabled: controller.isLoading.value,
-            child: RefreshIndicator(
-              onRefresh: () => controller.getOrders(),
-              child: controller.histories.isEmpty
-                  ? ListView(
-                      children: const [EmptyWidget()],
-                    )
-                  : ListView.separated(
-                      itemBuilder: (context, index) =>
-                          controller.isLoading.value
-                              ? _buildLoadingItem(index: index)
-                              : _buildHistoryItem(index: index),
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 8.dp),
-                      itemCount: controller.isLoading.value
-                          ? 5
-                          : controller.histories.length,
-                    ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                DropdownButton(
+                  value: controller.selectedType.value,
+                  items: controller.types
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e == 'Unpaid'
+                              ? 'Menunggu Pembayaran'
+                              : e == 'Waiting'
+                                  ? 'Sedang Diproses'
+                                  : e),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      controller.setSelectedType(type: value);
+                    }
+                  },
+                ),
+                SizedBox(height: 16.dp),
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () => controller.getOrders(),
+                    child: controller.histories.isEmpty
+                        ? ListView(
+                            children: const [EmptyWidget()],
+                          )
+                        : ListView.separated(
+                            itemBuilder: (context, index) =>
+                                controller.isLoading.value
+                                    ? _buildLoadingItem(index: index)
+                                    : _buildHistoryItem(index: index),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 8.dp),
+                            itemCount: controller.isLoading.value
+                                ? 5
+                                : controller.histories.length,
+                          ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),

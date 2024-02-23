@@ -5,6 +5,8 @@ import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
 import 'package:sarmini_mbokdhe/models/order_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../../models/user_response.dart';
+
 class PaymentController extends BaseController {
   final Rx<OrderDatum?> selectedOrder = Rx(null);
   OrderDatum? get getOrder => selectedOrder.value;
@@ -41,6 +43,15 @@ class PaymentController extends BaseController {
       });
 
       await ApiProvider().post(endpoint: '/orders/upload', body: formData);
+      final user = await getCurrentLoggedInUser();
+      final response =
+          await ApiProvider().post(endpoint: '/users/deduct', body: {
+        'userId': user.value!.id,
+        'amount': getOrder!.totalPrice,
+      });
+      final userData = UserResponse.fromJson(response);
+      await setCurrentLoggedInUser(userData.user);
+
       Get.back(result: 'success');
 
       Utils.showGetSnackbar('Pembayaran Berhasil!', true);
