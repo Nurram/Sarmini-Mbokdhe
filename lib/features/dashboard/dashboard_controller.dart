@@ -1,0 +1,14 @@
+import 'package:sarmini_mbokdhe/core_imports.dart';
+import 'package:sarmini_mbokdhe/features/history/history_widget.dart';
+import 'package:sarmini_mbokdhe/features/home/home_widget.dart';
+
+class DashboardController extends BaseController {
+  final pageIndex = 0.obs;
+  final _pages = <Widget>[
+    const HomeWidget(),
+    const HistoryWidget(),
+    const HomeWidget(),
+  ];
+
+  Widget getCurrentPage() => _pages[pageIndex.value];
+}
