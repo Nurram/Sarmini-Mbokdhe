@@ -77,7 +77,7 @@ class HomeWidget extends GetView<HomeController> {
                 InkWell(
                   onTap: () {
                     showAddressBottomSheet(
-                      groupValue: controller.selectedAddress,
+                      groupValue: controller.selectedAddressId,
                       addresses: controller.addresses,
                       onChanged: (p0) {
                         controller.setSelectedAddress(id: p0);

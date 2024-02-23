@@ -4,7 +4,7 @@ import 'package:sarmini_mbokdhe/models/address_response.dart';
 import '../core_imports.dart';
 
 showAddressBottomSheet(
-    {required Rx<AddressDatum?> groupValue,
+    {required Rx<int> groupValue,
     required List<AddressDatum> addresses,
     required Function(int) onChanged}) {
   showModalBottomSheet(
@@ -36,11 +36,10 @@ showAddressBottomSheet(
                         final data = addresses[index];
 
                         return Obx(
-                          () => CheckboxListTile(
+                          () => RadioListTile(
                             onChanged: (value) => onChanged(data.id),
-                            value: groupValue.value != null
-                                ? data.id == groupValue.value!.id
-                                : false,
+                            groupValue: groupValue.value,
+                            value: data.id,
                             title: Text(data.name),
                             subtitle: Text(data.address),
                           ),

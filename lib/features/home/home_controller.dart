@@ -12,6 +12,7 @@ import '../../models/voucher_response.dart';
 
 class HomeController extends BaseController {
   final Rx<AddressDatum?> selectedAddress = Rx(null);
+  final selectedAddressId = (-1).obs;
 
   final Rx<User?> loggedInUser = Rx(null);
   final addresses = <AddressDatum>[].obs;
@@ -20,17 +21,29 @@ class HomeController extends BaseController {
   final products = <ProductDatum>[].obs;
   final constants = <ConstantsDatum>[].obs;
 
-  setSelectedAddress({required int id}) {
-    selectedAddress(
-      addresses.firstWhere((element) => element.id == id),
-    );
+  setSelectedAddress({required int id}) async {
+    if (selectedAddress.value!.id != id) {
+      try {
+        final user = await getCurrentLoggedInUser();
+        await ApiProvider().post(
+            endpoint: '/address/setPrimary',
+            body: {'userId': user.value!.id, 'id': id});
 
-    Utils.storeToSecureStorage(
-      key: Constants.address,
-      data: jsonEncode(
-        selectedAddress.value!.toJson(),
-      ),
-    );
+        selectedAddress(
+          addresses.firstWhere((element) => element.isPrimary),
+        );
+        selectedAddressId(selectedAddress.value!.id);
+
+        Utils.storeToSecureStorage(
+          key: Constants.address,
+          data: jsonEncode(
+            selectedAddress.value!.toJson(),
+          ),
+        );
+      } catch (e) {
+        Utils.showGetSnackbar(e.toString(), false);
+      }
+    }
   }
 
   getDatas() async {
@@ -67,6 +80,10 @@ class HomeController extends BaseController {
       products(
         ProductResponse.fromJson(productResult).data,
       );
+      selectedAddress(
+        addresses.firstWhere((element) => element.isPrimary),
+      );
+      selectedAddressId(selectedAddress.value!.id);
 
       isLoading(false);
     } catch (e) {
@@ -109,6 +126,7 @@ class HomeController extends BaseController {
       );
 
       selectedAddress(address);
+      selectedAddressId(selectedAddress.value!.id);
     }
 
     final addressesJson =

@@ -35,6 +35,7 @@ class AddressScreen extends GetView<AddressController> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
+        icon: const Icon(Icons.add),
         label: const Text('Tambah Alamat'),
       ),
     );
