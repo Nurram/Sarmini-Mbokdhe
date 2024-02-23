@@ -1,8 +1,6 @@
 import 'dart:convert';
 
 import 'package:sarmini_mbokdhe/core_imports.dart';
-import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
-import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
 import 'package:sarmini_mbokdhe/models/user_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';

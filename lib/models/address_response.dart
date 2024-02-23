@@ -49,6 +49,8 @@ class AddressDatum {
   String? phoneNumber;
   String? lat;
   String? long;
+  int postalCode;
+  bool isPrimary;
   dynamic updatedAt;
   dynamic createdAt;
 
@@ -61,6 +63,8 @@ class AddressDatum {
     required this.phoneNumber,
     required this.lat,
     required this.long,
+    required this.postalCode,
+    required this.isPrimary,
     required this.updatedAt,
     required this.createdAt,
   });
@@ -74,6 +78,8 @@ class AddressDatum {
         phoneNumber: json["phoneNumber"],
         lat: json["lat"],
         long: json["long"],
+        postalCode: json["postalCode"],
+        isPrimary: json["isPrimary"] == 1 ? true : false,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
       );
@@ -87,6 +93,8 @@ class AddressDatum {
         "phoneNumber": phoneNumber,
         "lat": lat,
         "long": long,
+        "postalCode": postalCode,
+        "isPrimary": isPrimary,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
       };
