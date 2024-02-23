@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:sarmini_mbokdhe/core_imports.dart';
+import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
+import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
 import 'package:sarmini_mbokdhe/models/user_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
@@ -87,6 +89,11 @@ class HomeController extends BaseController {
       isLoading(false);
       Utils.showGetSnackbar(e.toString(), false);
     }
+  }
+
+  Future<bool> checkLoggedIn() async {
+    final loggedInUser = await getCurrentLoggedInUser();
+    return loggedInUser.value != null;
   }
 
   @override

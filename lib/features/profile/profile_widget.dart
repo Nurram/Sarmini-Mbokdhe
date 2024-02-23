@@ -61,7 +61,7 @@ class ProfileWidget extends GetView<ProfileController> {
                       const CustomDivider(height: 8),
                       InkWell(
                         onTap: () async {
-                          await Utils.clearSecureStorage();
+                          controller.logout();
 
                           Get.offAll(
                             () => const DashboardScreen(),

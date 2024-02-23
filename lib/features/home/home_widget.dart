@@ -4,6 +4,8 @@ import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_binding.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_screen.dart';
 import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
+import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
+import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/features/search/search_binding.dart';
 import 'package:sarmini_mbokdhe/features/search/search_screen.dart';
 import 'package:sarmini_mbokdhe/features/search_category/search_category_binding.dart';
@@ -121,18 +123,44 @@ class HomeWidget extends GetView<HomeController> {
                   ),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.chat_outlined,
-                  size: 20.dp,
-                  color: CustomColors.primaryColor,
+                InkWell(
+                  onTap: () async {
+                    final loggedIn = await controller.checkLoggedIn();
+
+                    if (!loggedIn) {
+                      Get.to(
+                        () => const LoginScreen(),
+                        binding: LoginBinding(),
+                      );
+                    } else {
+                      Get.to(
+                        () => const CartScreen(),
+                        binding: CartBinding(),
+                      );
+                    }
+                  },
+                  child: Icon(
+                    Icons.chat_outlined,
+                    size: 20.dp,
+                    color: CustomColors.primaryColor,
+                  ),
                 ),
                 SizedBox(width: 16.dp),
                 InkWell(
-                  onTap: () {
-                    Get.to(
-                      () => const CartScreen(),
-                      binding: CartBinding(),
-                    );
+                  onTap: () async {
+                    final loggedIn = await controller.checkLoggedIn();
+
+                    if (!loggedIn) {
+                      Get.to(
+                        () => const LoginScreen(),
+                        binding: LoginBinding(),
+                      );
+                    } else {
+                      Get.to(
+                        () => const CartScreen(),
+                        binding: CartBinding(),
+                      );
+                    }
                   },
                   child: Icon(
                     Icons.shopping_cart_outlined,

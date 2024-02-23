@@ -44,4 +44,9 @@ class BaseController extends GetxController {
     isLoading(false);
     Utils.showGetSnackbar(msg, false);
   }
+
+  logout() async {
+    await Utils.clearSecureStorage();
+    userController.loggedInUser(null);
+  }
 }

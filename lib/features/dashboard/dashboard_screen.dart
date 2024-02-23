@@ -17,7 +17,7 @@ class DashboardScreen extends GetView<DashboardController> {
             currentIndex: controller.pageIndex.value,
             selectedItemColor: CustomColors.primaryColor,
             onTap: (value) async {
-              if (value == 2) {
+              if (value != 0) {
                 if (await controller.isLoggedIn()) {
                   controller.pageIndex(value);
                 } else {
