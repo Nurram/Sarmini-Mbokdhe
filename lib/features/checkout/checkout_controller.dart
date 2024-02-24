@@ -217,6 +217,13 @@ class CheckoutController extends BaseController {
     }
   }
 
+  showAddressBottomSheet({required BuildContext context}) async {
+    final selectedAddress =
+        await homeController.showAddressBottomSheet(context: Get.context!);
+
+    if (selectedAddress != null) address(selectedAddress);
+  }
+
   @override
   void onInit() {
     address(homeController.selectedAddress.value);

@@ -142,59 +142,66 @@ class CheckoutScreen extends GetView<CheckoutController> {
   Widget _buildAddress() {
     final address = controller.address.value;
 
-    return Padding(
-      padding: EdgeInsets.all(16.dp),
-      child: Column(
-        children: [
-          Row(
+    return InkWell(
+      onTap: () {
+        controller.showAddressBottomSheet(context: Get.context!);
+      },
+      child: Padding(
+        padding: EdgeInsets.all(16.dp),
+        child: Obx(
+          () => Column(
             children: [
-              Icon(
-                Icons.location_on_outlined,
-                size: 14.dp,
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 14.dp,
+                  ),
+                  SizedBox(width: 8.dp),
+                  Expanded(
+                    child: Text(
+                      'Alamat Pengiriman',
+                      style: CustomTextStyle.black(),
+                    ),
+                  )
+                ],
               ),
-              SizedBox(width: 8.dp),
-              Expanded(
-                child: Text(
-                  'Alamat Pengiriman',
-                  style: CustomTextStyle.black(),
-                ),
-              )
+              SizedBox(height: 8.dp),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.white,
+                    size: 14.dp,
+                  ),
+                  SizedBox(width: 8.dp),
+                  Expanded(
+                    child: Text(
+                      '${address?.receipient} | ${address?.phoneNumber}',
+                      style: CustomTextStyle.black(),
+                    ),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.white,
+                    size: 14.dp,
+                  ),
+                  SizedBox(width: 8.dp),
+                  Expanded(
+                    child: Text(
+                      controller.address.value!.address,
+                      style: CustomTextStyle.black(),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
-          SizedBox(height: 8.dp),
-          Row(
-            children: [
-              Icon(
-                Icons.location_on_outlined,
-                color: Colors.white,
-                size: 14.dp,
-              ),
-              SizedBox(width: 8.dp),
-              Expanded(
-                child: Text(
-                  '${address?.receipient} | ${address?.phoneNumber}',
-                  style: CustomTextStyle.black(),
-                ),
-              )
-            ],
-          ),
-          Row(
-            children: [
-              Icon(
-                Icons.location_on_outlined,
-                color: Colors.white,
-                size: 14.dp,
-              ),
-              SizedBox(width: 8.dp),
-              Expanded(
-                child: Text(
-                  controller.address.value!.address,
-                  style: CustomTextStyle.black(),
-                ),
-              )
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

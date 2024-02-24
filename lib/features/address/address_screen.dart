@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
+import 'package:sarmini_mbokdhe/features/add_address/add_address_binding.dart';
+import 'package:sarmini_mbokdhe/features/add_address/add_address_screen.dart';
 import 'package:sarmini_mbokdhe/features/address/address_controller.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -34,7 +36,14 @@ class AddressScreen extends GetView<AddressController> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(
+            () => const AddAddressScreen(),
+            binding: AddAddressBinding(),
+          )?.then(
+            (value) => controller.getAddress(),
+          );
+        },
         icon: const Icon(Icons.add),
         label: const Text('Tambah Alamat'),
       ),

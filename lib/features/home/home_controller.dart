@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
 import 'package:sarmini_mbokdhe/models/user_response.dart';
@@ -9,6 +10,7 @@ import '../../models/category_response.dart';
 import '../../models/constants.response.dart';
 import '../../models/product_response.dart';
 import '../../models/voucher_response.dart';
+import '../../widgets/address_bottom_sheet.dart';
 
 class HomeController extends BaseController {
   final Rx<AddressDatum?> selectedAddress = Rx(null);
@@ -25,13 +27,11 @@ class HomeController extends BaseController {
     if (selectedAddress.value!.id != id) {
       try {
         final user = await getCurrentLoggedInUser();
-        await ApiProvider().post(
+        final response = await ApiProvider().post(
             endpoint: '/address/setPrimary',
             body: {'userId': user.value!.id, 'id': id});
 
-        selectedAddress(
-          addresses.firstWhere((element) => element.isPrimary),
-        );
+        selectedAddress(AddressDatum.fromJson(response['data']));
         selectedAddressId(selectedAddress.value!.id);
 
         Utils.storeToSecureStorage(
@@ -40,10 +40,30 @@ class HomeController extends BaseController {
             selectedAddress.value!.toJson(),
           ),
         );
+
+        Get.back(result: selectedAddress.value);
       } catch (e) {
         Utils.showGetSnackbar(e.toString(), false);
       }
     }
+  }
+
+  Future<AddressDatum?> showAddressBottomSheet(
+      {required BuildContext context}) async {
+    final selectedAddress = await showModalBottomSheet(
+      context: Get.context!,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.dp),
+          topRight: Radius.circular(16.dp),
+        ),
+      ),
+      builder: (context) {
+        return const AddressBottomSheet();
+      },
+    );
+
+    return selectedAddress;
   }
 
   getDatas() async {
@@ -57,18 +77,7 @@ class HomeController extends BaseController {
       await getConstants();
 
       if (loggedInUser.value != null) {
-        final user = loggedInUser.value!;
-        final addressResult = await ApiProvider()
-            .post(endpoint: '/address', body: {'userId': user.id});
-        final adddress = AddressResponse.fromJson(addressResult);
-
-        addresses(adddress.data);
-        Utils.storeToSecureStorage(
-          key: Constants.addresses,
-          data: jsonEncode(
-            adddress.toJson(),
-          ),
-        );
+        await getAddress();
       }
 
       vouchers(
@@ -80,15 +89,31 @@ class HomeController extends BaseController {
       products(
         ProductResponse.fromJson(productResult).data,
       );
-      selectedAddress(
-        addresses.firstWhere((element) => element.isPrimary),
-      );
-      selectedAddressId(selectedAddress.value!.id);
 
       isLoading(false);
     } catch (e) {
       Utils.showGetSnackbar(e as String, false);
     }
+  }
+
+  getAddress() async {
+    final user = loggedInUser.value!;
+    final addressResult = await ApiProvider()
+        .post(endpoint: '/address', body: {'userId': user.id});
+    final adddress = AddressResponse.fromJson(addressResult);
+
+    addresses(adddress.data);
+    Utils.storeToSecureStorage(
+      key: Constants.addresses,
+      data: jsonEncode(
+        adddress.toJson(),
+      ),
+    );
+
+    selectedAddress(
+      addresses.firstWhere((element) => element.isPrimary),
+    );
+    selectedAddressId(selectedAddress.value!.id);
   }
 
   getConstants() async {

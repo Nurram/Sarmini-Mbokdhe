@@ -45,7 +45,7 @@ class CustomLabeledDropdown extends StatelessWidget {
       children: [
         Text(
           label,
-          style: labelStyle ?? CustomTextStyle.black14w700(),
+          style: labelStyle ?? CustomTextStyle.black14w400(),
         ),
         SizedBox(height: borderGap),
         Container(
@@ -70,8 +70,8 @@ class CustomLabeledDropdown extends StatelessWidget {
             items: items
                 .map(
                   (e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e),
+                    value: e.id,
+                    child: Text(e.name),
                   ),
                 )
                 .toList(),

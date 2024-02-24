@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sarmini_mbokdhe/core/themes/custom_text_theme.dart';
 
 import '../colors.dart';
 
@@ -51,7 +52,7 @@ class CustomLabeledTextFormField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: labelStyle,
+          style: labelStyle ?? CustomTextStyle.black14w400(),
         ),
         Padding(
           padding: EdgeInsets.only(top: labelGap, bottom: 16),

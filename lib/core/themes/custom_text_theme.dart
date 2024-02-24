@@ -511,6 +511,14 @@ abstract class CustomTextStyle {
       color: Colors.grey.shade700,
     );
   }
+  
+  static TextStyle grey12w600() {
+    return GoogleFonts.inter(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w600,
+      color: Colors.grey.shade700,
+    );
+  }
 
   static TextStyle grey14w700() {
     return GoogleFonts.inter(

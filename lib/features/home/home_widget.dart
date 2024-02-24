@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_binding.dart';
@@ -76,13 +75,7 @@ class HomeWidget extends GetView<HomeController> {
               children: [
                 InkWell(
                   onTap: () {
-                    showAddressBottomSheet(
-                      groupValue: controller.selectedAddressId,
-                      addresses: controller.addresses,
-                      onChanged: (p0) {
-                        controller.setSelectedAddress(id: p0);
-                      },
-                    );
+                    controller.showAddressBottomSheet(context: Get.context!);
                   },
                   child: Row(
                     children: [
