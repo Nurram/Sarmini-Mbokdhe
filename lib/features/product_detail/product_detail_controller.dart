@@ -2,6 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
+import 'package:sarmini_mbokdhe/features/select_address/select_address_binding.dart';
+import 'package:sarmini_mbokdhe/features/select_address/select_address_screen.dart';
 import 'package:sarmini_mbokdhe/models/district_response.dart';
 import 'package:sarmini_mbokdhe/models/product_response.dart';
 import 'package:sarmini_mbokdhe/models/province_response.dart';
@@ -26,6 +28,22 @@ class ProductDetailController extends BaseController {
   final qty = 1.obs;
   final isStockLoading = false.obs;
   final isStockAvailable = true.obs;
+  final predictedFee = 0.obs;
+
+  predictFee() {
+    Get.to(
+      () => const SelectAddressScreen(),
+      binding: SelectAddressBinding(),
+    )?.then((value) {
+      if (value != null) {
+        selectedProvince(value['province']);
+        selectedDistrict(value['district']);
+        selectedRegency(value['regency']);
+
+        _calculateFee();
+      }
+    });
+  }
 
   getDetail() async {
     isLoading(true);
@@ -79,7 +97,7 @@ class ProductDetailController extends BaseController {
     );
   }
 
-  calculateFee() {
+  _calculateFee() {
     final lat = selectedDistrict.value!.latitude;
     final long = selectedDistrict.value!.longitude;
 

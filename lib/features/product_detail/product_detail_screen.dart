@@ -132,7 +132,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
         ),
         InkWell(
           onTap: () {
-            _showOngkirBottomSheet();
+            controller.predictFee();
           },
           child: Container(
             width: double.infinity,
@@ -148,7 +148,9 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                   ),
                   SizedBox(width: 8.dp),
                   Text(
-                    'Cek Ongkos Kirim',
+                    controller.serviceFee.value == '0'
+                        ? 'Cek Ongkos Kirim'
+                        : 'Perkiraan Ongkos kirim: ${controller.serviceFee.value}',
                     style: TextStyle(color: Colors.green.shade600),
                   )
                 ],
@@ -281,93 +283,6 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
           ),
         ),
       ),
-    );
-  }
-
-  _showOngkirBottomSheet() {
-    controller.selectedProvince(null);
-    controller.selectedDistrict(null);
-    controller.selectedRegency(null);
-    controller.serviceFee('Rp0');
-
-    showModalBottomSheet(
-      context: Get.context!,
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.dp, vertical: 24.dp),
-          child: Obx(
-            () => ListView(
-              children: [
-                const Text('Provinsi'),
-                DropdownMenu(
-                  width: 100.w - 32.dp,
-                  enableSearch: true,
-                  onSelected: (value) {
-                    if (value != null) {
-                      controller.onProvinceSelected(id: value);
-                    }
-                  },
-                  dropdownMenuEntries: controller.provinces
-                      .map(
-                        (element) => DropdownMenuEntry(
-                            value: element.id, label: element.name),
-                      )
-                      .toList(),
-                ),
-                SizedBox(height: 12.dp),
-                const Text('Kab/Kota'),
-                DropdownMenu(
-                  enabled: controller.selectedProvince.value != null,
-                  width: 100.w - 32.dp,
-                  onSelected: (value) {
-                    if (value != null) {
-                      controller.onRegencySelected(id: value);
-                    }
-                  },
-                  dropdownMenuEntries: controller.regencies
-                      .map(
-                        (element) => DropdownMenuEntry(
-                            value: element.id, label: element.name),
-                      )
-                      .toList(),
-                ),
-                SizedBox(height: 12.dp),
-                const Text('Kecamatan'),
-                DropdownMenu(
-                  enabled: controller.selectedRegency.value != null,
-                  width: 100.w - 32.dp,
-                  onSelected: (value) {
-                    if (value != null) {
-                      controller.onDistrictSelected(id: value);
-                    }
-                  },
-                  dropdownMenuEntries: controller.districts
-                      .map(
-                        (element) => DropdownMenuEntry(
-                            value: element.id, label: element.name),
-                      )
-                      .toList(),
-                ),
-                SizedBox(height: 16.dp),
-                Text('Ongkos Kirim: ${controller.serviceFee.value}'),
-                SizedBox(height: 16.dp),
-                Visibility(
-                  child: CustomElevatedButton(
-                    text: 'Cek Ongkir',
-                    onPressed: controller.selectedDistrict.value != null
-                        ? () {
-                            controller.calculateFee();
-                          }
-                        : null,
-                    bgColor: CustomColors.primaryColor,
-                    borderRadius: 0,
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 
