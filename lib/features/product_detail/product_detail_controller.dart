@@ -135,9 +135,14 @@ class ProductDetailController extends BaseController {
   }
 
   checkStock() async {
-    isStockLoading(true);
-
     try {
+      final homeController = Get.find<HomeController>();
+      if (homeController.selectedAddress.value == null) {
+        throw 'Anda belum memilih alamat pengiriman';
+      }
+
+      isStockLoading(true);
+
       final detailResponse = await ApiProvider().post(
           endpoint: '/products/detail',
           body: {'id': selectedProduct.value!.id});

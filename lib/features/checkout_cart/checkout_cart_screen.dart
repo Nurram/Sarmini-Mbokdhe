@@ -191,7 +191,11 @@ class CheckoutCartScreen extends GetView<CheckoutCartController> {
               SizedBox(width: 8.dp),
               Expanded(
                 child: Text(
-                  controller.address.value!.address,
+                  '${controller.address.value!.address}, '
+                  '${controller.address.value!.district}, '
+                  '${controller.address.value!.regency}, '
+                  '${controller.address.value!.province}, '
+                  '${controller.address.value!.postalCode}',
                   style: CustomTextStyle.black(),
                 ),
               )

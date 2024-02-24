@@ -14,6 +14,9 @@ class AddressRequest {
   String name;
   String receipient;
   String address;
+  String district;
+  String regency;
+  String province;
   String phoneNumber;
   double lat;
   double long;
@@ -25,6 +28,9 @@ class AddressRequest {
     required this.name,
     required this.receipient,
     required this.address,
+    required this.district,
+    required this.regency,
+    required this.province,
     required this.phoneNumber,
     required this.lat,
     required this.long,
@@ -37,6 +43,9 @@ class AddressRequest {
         name: json["name"],
         receipient: json["receipient"],
         address: json["address"],
+        district: json["district"],
+        regency: json["regency"],
+        province: json["province"],
         phoneNumber: json["phoneNumber"],
         lat: json["lat"]?.toDouble(),
         long: json["long"]?.toDouble(),
@@ -49,6 +58,9 @@ class AddressRequest {
         "name": name,
         "receipient": receipient,
         "address": address,
+        "province": province,
+        "district": district,
+        "regency": regency,
         "phoneNumber": phoneNumber,
         "lat": lat,
         "long": long,

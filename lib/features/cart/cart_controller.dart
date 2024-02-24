@@ -2,10 +2,33 @@ import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/cart_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../checkout_cart/checkout_cart_binding.dart';
+import '../checkout_cart/checkout_cart_screen.dart';
+import '../home/home_controller.dart';
+
 class CartController extends BaseController {
   final carts = <CartDatum>[].obs;
   final selectMode = false.obs;
   final allSelected = false.obs;
+
+  checkAddress() {
+    try {
+      final homeController = Get.find<HomeController>();
+      if (homeController.selectedAddress.value == null) {
+        throw 'Anda belum memilih alamat pengiriman';
+      }
+
+      Get.to(
+        () => const CheckoutCartScreen(),
+        binding: CheckoutCartBinding(),
+        arguments: carts,
+      )?.then(
+        (value) => getCarts(),
+      );
+    } catch (e) {
+      Utils.showGetSnackbar(e.toString(), false);
+    }
+  }
 
   getCarts() async {
     selectMode(false);

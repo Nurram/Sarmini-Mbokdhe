@@ -110,13 +110,7 @@ class CartScreen extends GetView<CartController> {
                           child: CustomElevatedButton(
                             text: 'Bayar',
                             onPressed: () {
-                              Get.to(
-                                () => const CheckoutCartScreen(),
-                                binding: CheckoutCartBinding(),
-                                arguments: controller.carts,
-                              )?.then(
-                                (value) => controller.getCarts(),
-                              );
+                             controller.checkAddress();
                             },
                             bgColor: CustomColors.primaryColor,
                             borderRadius: 0,

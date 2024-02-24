@@ -13,7 +13,6 @@ import 'package:sarmini_mbokdhe/features/voucher_detail/voucher_detail_screen.da
 import 'package:sarmini_mbokdhe/features/vouchers/voucher_screen.dart';
 import 'package:sarmini_mbokdhe/models/category_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
-import 'package:sarmini_mbokdhe/widgets/address_bottom_sheet.dart';
 import 'package:sarmini_mbokdhe/widgets/product_item.dart';
 import 'package:sarmini_mbokdhe/widgets/search_textfield.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -98,7 +97,8 @@ class HomeWidget extends GetView<HomeController> {
                               ? SizedBox(
                                   width: 25.w,
                                   child: Text(
-                                    controller.selectedAddress.value!.address,
+                                    '${controller.selectedAddress.value!.address}, '
+                                    '${controller.selectedAddress.value!.district}',
                                     style: CustomTextStyle.grey10w400(),
                                     maxLines: 1,
                                   ),

@@ -4,6 +4,8 @@ import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/add_address/add_address_binding.dart';
 import 'package:sarmini_mbokdhe/features/add_address/add_address_screen.dart';
 import 'package:sarmini_mbokdhe/features/address/address_controller.dart';
+import 'package:sarmini_mbokdhe/features/edit_address/edit_address_binding.dart';
+import 'package:sarmini_mbokdhe/features/edit_address/edit_address_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class AddressScreen extends GetView<AddressController> {
@@ -53,47 +55,63 @@ class AddressScreen extends GetView<AddressController> {
   Widget _buildItem({required int index}) {
     final address = controller.addresses[index];
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(16.dp),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    address.name,
-                    style: CustomTextStyle.black15Bold(),
-                  ),
-                ),
-                Visibility(
-                  visible: address.isPrimary,
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 4.dp, horizontal: 12.dp),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: CustomColors.primaryColor),
+    return InkWell(
+      onTap: () {
+        Get.to(
+          () => const EditAddressScreen(),
+          binding: EditAddressBinding(),
+          arguments: address,
+        )?.then((value) {
+          if (value != null) {
+            controller.getAddress();
+          }
+        });
+      },
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(16.dp),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
                     child: Text(
-                      'Alamat Utama',
-                      style: CustomTextStyle.white(),
+                      address.name,
+                      style: CustomTextStyle.black15Bold(),
                     ),
                   ),
-                )
-              ],
-            ),
-            SizedBox(height: 8.dp),
-            Text('${address.receipient} | ${address.phoneNumber}'),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.dp),
-              child: Text(address.address),
-            ),
-            Text(address.postalCode.toString())
-          ],
+                  Visibility(
+                    visible: address.isPrimary,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 4.dp, horizontal: 12.dp),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: CustomColors.primaryColor),
+                      child: Text(
+                        'Alamat Utama',
+                        style: CustomTextStyle.white(),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 8.dp),
+              Text('${address.receipient} | ${address.phoneNumber}'),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.dp),
+                child: Text('${address.address}, '
+                    '${address.district}, '
+                    '${address.regency}, '
+                    '${address.province}'),
+              ),
+              Text(address.postalCode.toString())
+            ],
+          ),
         ),
       ),
     );

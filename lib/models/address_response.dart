@@ -43,39 +43,48 @@ class AddressResponse {
 class AddressDatum {
   int id;
   int userId;
-  String address;
   String name;
   String receipient;
-  String? phoneNumber;
-  String? lat;
-  String? long;
+  String phoneNumber;
+  String address;
+  String province;
+  String district;
+  String regency;
+  String lat;
+  String long;
   int postalCode;
   bool isPrimary;
+  DateTime createdAt;
   dynamic updatedAt;
-  dynamic createdAt;
 
   AddressDatum({
     required this.id,
     required this.userId,
-    required this.address,
     required this.name,
     required this.receipient,
     required this.phoneNumber,
+    required this.address,
+    required this.province,
+    required this.district,
+    required this.regency,
     required this.lat,
     required this.long,
     required this.postalCode,
     required this.isPrimary,
-    required this.updatedAt,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory AddressDatum.fromJson(Map<String, dynamic> json) => AddressDatum(
         id: json["id"],
         userId: json["userId"],
-        address: json["address"],
         name: json["name"],
         receipient: json["receipient"],
         phoneNumber: json["phoneNumber"],
+        address: json["address"],
+        province: json["province"] ?? "",
+        district: json["district"] ?? "",
+        regency: json["regency"] ?? "",
         lat: json["lat"],
         long: json["long"],
         postalCode: json["postalCode"],
@@ -87,14 +96,17 @@ class AddressDatum {
   Map<String, dynamic> toJson() => {
         "id": id,
         "userId": userId,
-        "address": address,
         "name": name,
         "receipient": receipient,
         "phoneNumber": phoneNumber,
+        "address": address,
+        "province": province,
+        "district": district,
+        "regency": regency,
         "lat": lat,
         "long": long,
         "postalCode": postalCode,
-        "isPrimary": isPrimary,
+        "isPrimary": isPrimary ? 1 : 0,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
       };

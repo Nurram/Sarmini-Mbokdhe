@@ -111,9 +111,9 @@ class HomeController extends BaseController {
     );
 
     selectedAddress(
-      addresses.firstWhere((element) => element.isPrimary),
+      addresses.firstWhereOrNull((element) => element.isPrimary),
     );
-    selectedAddressId(selectedAddress.value!.id);
+    selectedAddressId(selectedAddress.value?.id);
   }
 
   getConstants() async {
@@ -143,26 +143,16 @@ class HomeController extends BaseController {
     final userCtr = Get.find<UserController>();
     loggedInUser(await userCtr.getCurrentLoggedInUser());
 
-    final addressJson =
-        await Utils.readFromSecureStorage(key: Constants.address);
-    if (addressJson != null) {
-      final address = AddressDatum.fromJson(
-        jsonDecode(addressJson),
-      );
+    // final addressJson =
+    //     await Utils.readFromSecureStorage(key: Constants.address);
+    // if (addressJson != null) {
+    //   final address = AddressDatum.fromJson(
+    //     jsonDecode(addressJson),
+    //   );
 
-      selectedAddress(address);
-      selectedAddressId(selectedAddress.value!.id);
-    }
-
-    final addressesJson =
-        await Utils.readFromSecureStorage(key: Constants.addresses);
-    if (addressesJson != null) {
-      final addresses = AddressResponse.fromJson(
-        jsonDecode(addressesJson),
-      );
-
-      this.addresses(addresses.data);
-    }
+    //   selectedAddress(address);
+    //   selectedAddressId(selectedAddress.value!.id);
+    // }
 
     await getDatas();
     super.onInit();
