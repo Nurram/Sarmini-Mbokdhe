@@ -13,7 +13,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black8w600({double? height}) {
     return GoogleFonts.inter(
-      fontSize: 8.sp,
+      fontSize: 8.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
       height: height,
@@ -22,7 +22,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black10w400({double? height}) {
     return GoogleFonts.inter(
-      fontSize: 10.sp,
+      fontSize: 10.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
       height: height,
@@ -31,7 +31,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black10w600({double? height}) {
     return GoogleFonts.inter(
-      fontSize: 10.sp,
+      fontSize: 10.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
       height: height,
@@ -40,7 +40,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black11w400() {
     return GoogleFonts.inter(
-      fontSize: 11.sp,
+      fontSize: 11.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -48,7 +48,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black11w600() {
     return GoogleFonts.inter(
-      fontSize: 11.sp,
+      fontSize: 11.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
     );
@@ -56,7 +56,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black12w700() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w700,
       color: Colors.black87,
     );
@@ -64,7 +64,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black12w400() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -72,7 +72,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black12w600() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
     );
@@ -80,7 +80,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black13w400() {
     return GoogleFonts.inter(
-      fontSize: 13.sp,
+      fontSize: 13.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -88,7 +88,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black14w400() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -96,7 +96,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black14w600() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
     );
@@ -104,7 +104,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black14w700() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w700,
       color: Colors.black87,
     );
@@ -112,7 +112,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black15w400() {
     return GoogleFonts.inter(
-      fontSize: 15.sp,
+      fontSize: 15.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -120,7 +120,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black15w700() {
     return GoogleFonts.inter(
-      fontSize: 15.sp,
+      fontSize: 15.dp,
       fontWeight: FontWeight.w700,
       color: Colors.black87,
     );
@@ -128,7 +128,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black15Bold() {
     return GoogleFonts.inter(
-      fontSize: 15.sp,
+      fontSize: 15.dp,
       fontWeight: FontWeight.bold,
       color: Colors.black87,
     );
@@ -136,7 +136,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black16w400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -144,7 +144,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black16w700({double? height}) {
     return GoogleFonts.inter(
-        fontSize: 16.sp,
+        fontSize: 16.dp,
         fontWeight: FontWeight.w700,
         color: Colors.black87,
         height: height);
@@ -152,7 +152,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black18w600({double? height}) {
     return GoogleFonts.inter(
-        fontSize: 18.sp,
+        fontSize: 18.dp,
         fontWeight: FontWeight.w600,
         color: Colors.black87,
         height: height);
@@ -160,7 +160,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black20w400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -168,7 +168,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black20w700() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.bold,
       color: Colors.black87,
     );
@@ -176,7 +176,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black24w400() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -184,7 +184,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black24w600() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w600,
       color: Colors.black87,
     );
@@ -192,7 +192,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black25w400() {
     return GoogleFonts.inter(
-      fontSize: 25.sp,
+      fontSize: 25.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -200,7 +200,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black32w400() {
     return GoogleFonts.inter(
-      fontSize: 32.sp,
+      fontSize: 32.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -208,7 +208,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black4516w400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black45,
     );
@@ -216,7 +216,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black4520w400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black45,
     );
@@ -232,7 +232,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5412w400() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w400,
       color: const Color(0xff404A3D),
     );
@@ -240,7 +240,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5414w700() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w700,
       color: const Color(0xff404A3D),
     );
@@ -248,7 +248,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5416w400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: const Color(0xff404A3D),
     );
@@ -256,7 +256,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5416w700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w700,
       color: const Color(0xff404A3D),
     );
@@ -264,7 +264,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5420w400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: const Color(0xff404A3D),
     );
@@ -272,7 +272,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5420w700() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w700,
       color: const Color(0xff404A3D),
     );
@@ -280,7 +280,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black5424w700() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w700,
       color: const Color(0xff404A3D),
     );
@@ -296,7 +296,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black8715w700() {
     return GoogleFonts.inter(
-      fontSize: 15.sp,
+      fontSize: 15.dp,
       fontWeight: FontWeight.w700,
       color: Colors.black87,
     );
@@ -304,7 +304,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black8716w700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w700,
       color: Colors.black87,
     );
@@ -312,7 +312,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black8716w400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -320,7 +320,7 @@ abstract class CustomTextStyle {
 
   static TextStyle black8720w400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: Colors.black87,
     );
@@ -336,7 +336,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white11w400() {
     return GoogleFonts.inter(
-      fontSize: 11.sp,
+      fontSize: 11.dp,
       fontWeight: FontWeight.w400,
       color: Colors.white,
     );
@@ -344,7 +344,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white11w600() {
     return GoogleFonts.inter(
-      fontSize: 11.sp,
+      fontSize: 11.dp,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
@@ -352,7 +352,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white12w600() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
@@ -360,7 +360,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white12w700() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
@@ -368,14 +368,14 @@ abstract class CustomTextStyle {
 
   static TextStyle white14w400() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       color: Colors.white,
     );
   }
 
   static TextStyle white14w700() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
@@ -383,7 +383,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white16w700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
@@ -391,7 +391,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white18w600() {
     return GoogleFonts.inter(
-      fontSize: 18.sp,
+      fontSize: 18.dp,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     );
@@ -399,7 +399,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white18w700() {
     return GoogleFonts.inter(
-      fontSize: 18.sp,
+      fontSize: 18.dp,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
@@ -407,7 +407,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white20w400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: Colors.white,
     );
@@ -415,7 +415,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white20w700() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     );
@@ -423,7 +423,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white24w700() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     );
@@ -431,7 +431,7 @@ abstract class CustomTextStyle {
 
   static TextStyle white32w700() {
     return GoogleFonts.inter(
-      fontSize: 32.sp,
+      fontSize: 32.dp,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     );
@@ -447,7 +447,7 @@ abstract class CustomTextStyle {
 
   static TextStyle red14w400() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w400,
       color: Colors.red,
     );
@@ -455,7 +455,7 @@ abstract class CustomTextStyle {
 
   static TextStyle red14w600() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w600,
       color: Colors.red,
     );
@@ -463,7 +463,7 @@ abstract class CustomTextStyle {
 
   static TextStyle red16w600() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w600,
       color: Colors.red,
     );
@@ -471,7 +471,7 @@ abstract class CustomTextStyle {
 
   static TextStyle red5416w700() {
     return GoogleFonts.inter(
-        fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.red);
+        fontSize: 16.dp, fontWeight: FontWeight.w700, color: Colors.red);
   }
 
   static TextStyle lightGrey({double? fontSize, FontWeight? fontWeight}) {
@@ -484,7 +484,7 @@ abstract class CustomTextStyle {
 
   static TextStyle lightGrey16W700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w700,
       color: Colors.grey.shade500,
     );
@@ -500,21 +500,21 @@ abstract class CustomTextStyle {
 
   static TextStyle grey10w400() {
     return GoogleFonts.inter(
-      fontSize: 10.sp,
+      fontSize: 10.dp,
       color: Colors.grey.shade700,
     );
   }
 
   static TextStyle grey12w400() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       color: Colors.grey.shade700,
     );
   }
   
   static TextStyle grey12w600() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w600,
       color: Colors.grey.shade700,
     );
@@ -522,7 +522,7 @@ abstract class CustomTextStyle {
 
   static TextStyle grey14w700() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w700,
       color: Colors.grey.shade700,
     );
@@ -530,7 +530,7 @@ abstract class CustomTextStyle {
 
   static TextStyle grey16W700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w700,
       color: Colors.grey.shade700,
     );
@@ -539,7 +539,7 @@ abstract class CustomTextStyle {
   static TextStyle primary() {
     return GoogleFonts.inter(
       color: CustomColors.primaryColor,
-      fontSize: 14.sp,
+      fontSize: 14.dp,
     );
   }
 
@@ -547,7 +547,7 @@ abstract class CustomTextStyle {
     return GoogleFonts.inter(
       color: CustomColors.primaryColor,
       fontWeight: FontWeight.w400,
-      fontSize: 12.sp,
+      fontSize: 12.dp,
     );
   }
 
@@ -555,7 +555,7 @@ abstract class CustomTextStyle {
     return GoogleFonts.inter(
       color: CustomColors.primaryColor,
       fontWeight: FontWeight.w600,
-      fontSize: 12.sp,
+      fontSize: 12.dp,
     );
   }
 
@@ -563,7 +563,7 @@ abstract class CustomTextStyle {
     return GoogleFonts.inter(
       color: CustomColors.primaryColor,
       fontWeight: FontWeight.w600,
-      fontSize: 14.sp,
+      fontSize: 14.dp,
     );
   }
 
@@ -571,13 +571,13 @@ abstract class CustomTextStyle {
     return GoogleFonts.inter(
       color: CustomColors.primaryColor,
       fontWeight: FontWeight.w700,
-      fontSize: 14.sp,
+      fontSize: 14.dp,
     );
   }
 
   static TextStyle primary16W400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: CustomColors.primaryColor,
     );
@@ -585,7 +585,7 @@ abstract class CustomTextStyle {
 
   static TextStyle primary18w600() {
     return GoogleFonts.inter(
-      fontSize: 18.sp,
+      fontSize: 18.dp,
       fontWeight: FontWeight.w600,
       color: CustomColors.primaryColor,
     );
@@ -593,7 +593,7 @@ abstract class CustomTextStyle {
 
   static TextStyle primary24W400() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w400,
       color: CustomColors.primaryColor,
     );
@@ -601,7 +601,7 @@ abstract class CustomTextStyle {
 
   static TextStyle primary24W700() {
     return GoogleFonts.inter(
-      fontSize: 24.sp,
+      fontSize: 24.dp,
       fontWeight: FontWeight.w700,
       color: CustomColors.primaryColor,
     );
@@ -609,7 +609,7 @@ abstract class CustomTextStyle {
 
   static TextStyle primary34W400() {
     return GoogleFonts.inter(
-      fontSize: 34.sp,
+      fontSize: 34.dp,
       fontWeight: FontWeight.w400,
       color: CustomColors.primaryColor,
     );
@@ -617,7 +617,7 @@ abstract class CustomTextStyle {
 
   static TextStyle primary34W700() {
     return GoogleFonts.inter(
-      fontSize: 34.sp,
+      fontSize: 34.dp,
       fontWeight: FontWeight.bold,
       color: CustomColors.primaryColor,
     );
@@ -631,7 +631,7 @@ abstract class CustomTextStyle {
 
   static TextStyle secondary14w700() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w700,
       color: CustomColors.secondaryColor,
     );
@@ -639,7 +639,7 @@ abstract class CustomTextStyle {
 
   static TextStyle secondary16w400() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w400,
       color: CustomColors.secondaryColor,
     );
@@ -647,7 +647,7 @@ abstract class CustomTextStyle {
 
   static TextStyle secondary16w700() {
     return GoogleFonts.inter(
-      fontSize: 16.sp,
+      fontSize: 16.dp,
       fontWeight: FontWeight.w700,
       color: CustomColors.secondaryColor,
     );
@@ -655,7 +655,7 @@ abstract class CustomTextStyle {
 
   static TextStyle secondary20W400() {
     return GoogleFonts.inter(
-      fontSize: 20.sp,
+      fontSize: 20.dp,
       fontWeight: FontWeight.w400,
       color: CustomColors.secondaryColor,
     );
@@ -697,7 +697,7 @@ abstract class CustomTextStyle {
 
   static TextStyle blue12w400() {
     return GoogleFonts.inter(
-      fontSize: 12.sp,
+      fontSize: 12.dp,
       fontWeight: FontWeight.w400,
       color: Colors.blue,
     );
@@ -705,7 +705,7 @@ abstract class CustomTextStyle {
 
   static TextStyle blue14w400() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w400,
       color: Colors.blue,
     );
@@ -719,7 +719,7 @@ abstract class CustomTextStyle {
 
   static TextStyle green14w600() {
     return GoogleFonts.inter(
-      fontSize: 14.sp,
+      fontSize: 14.dp,
       fontWeight: FontWeight.w600,
       color: Colors.green,
     );

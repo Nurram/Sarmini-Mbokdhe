@@ -1,11 +1,11 @@
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:sarmini_mbokdhe/core/themes/theme_imports.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/select_address/select_address_binding.dart';
 import 'package:sarmini_mbokdhe/features/select_address/select_address_screen.dart';
 
+import '../add_address/place_picker.dart';
 import 'edit_address_controller.dart';
-import 'place_picker.dart';
 
 class EditAddressScreen extends GetView<EditAddressController> {
   const EditAddressScreen({super.key});
@@ -84,7 +84,9 @@ class EditAddressScreen extends GetView<EditAddressController> {
                           () => const PlacePicker(),
                         )?.then((value) {
                           if (value != null) {
-                            controller.latLngCtr.text = value;
+                            value as LatLng;
+                            controller.latLngCtr.text =
+                                '${value.latitude}, ${value.longitude}';
                           }
                         });
                       },

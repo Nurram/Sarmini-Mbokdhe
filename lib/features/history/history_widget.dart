@@ -151,7 +151,7 @@ class HistoryWidget extends GetView<HistoryController> {
                                         : history.status == 'Waiting'
                                             ? CustomColors.primaryColor
                                             : Colors.amber,
-                                    fontSize: 10.sp,
+                                    fontSize: 10.dp,
                                   ),
                                 ),
                               )
@@ -265,7 +265,7 @@ class HistoryWidget extends GetView<HistoryController> {
                                   '',
                                   textAlign: TextAlign.end,
                                   style: GoogleFonts.inter(
-                                    fontSize: 10.sp,
+                                    fontSize: 10.dp,
                                   ),
                                 ),
                               )

@@ -339,7 +339,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     onPressed: controller.reduceQty,
                     icon: Icon(
                       Icons.remove,
-                      size: 12.sp,
+                      size: 12.dp,
                     ),
                   ),
                   Obx(
@@ -352,7 +352,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                     onPressed: controller.addQty,
                     icon: Icon(
                       Icons.add,
-                      size: 12.sp,
+                      size: 12.dp,
                     ),
                   ),
                 ],

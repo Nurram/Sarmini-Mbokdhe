@@ -14,7 +14,7 @@ class FavButton extends StatelessWidget {
       child: Icon(
         Icons.favorite,
         color: Colors.grey,
-        size: 18.sp,
+        size: 18.dp,
       ),
     );
   }

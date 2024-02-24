@@ -43,8 +43,8 @@ class CheckoutCartController extends BaseController {
           .value,
     );
     final address = this.address.value;
-    final toLat = double.parse(address!.lat!);
-    final toLong = double.parse(address.long!);
+    final toLat = double.parse(address!.lat);
+    final toLong = double.parse(address.long);
 
     final distance =
         Geolocator.distanceBetween(fromLat, fromLong, toLat, toLong) / 1000;

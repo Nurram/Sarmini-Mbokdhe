@@ -5,9 +5,6 @@ import 'package:sarmini_mbokdhe/network/api_provider.dart';
 import 'package:sarmini_mbokdhe/widgets/custom_divider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../checkout_cart/checkout_cart_binding.dart';
-import '../checkout_cart/checkout_cart_screen.dart';
-
 class CartScreen extends GetView<CartController> {
   const CartScreen({super.key});
 
@@ -110,7 +107,7 @@ class CartScreen extends GetView<CartController> {
                           child: CustomElevatedButton(
                             text: 'Bayar',
                             onPressed: () {
-                             controller.checkAddress();
+                              controller.checkAddress();
                             },
                             bgColor: CustomColors.primaryColor,
                             borderRadius: 0,
@@ -195,7 +192,7 @@ class CartScreen extends GetView<CartController> {
                       },
                       icon: Icon(
                         Icons.remove,
-                        size: 12.sp,
+                        size: 12.dp,
                       ),
                     ),
                     Text(
@@ -210,7 +207,7 @@ class CartScreen extends GetView<CartController> {
                       },
                       icon: Icon(
                         Icons.add,
-                        size: 12.sp,
+                        size: 12.dp,
                       ),
                     ),
                   ],

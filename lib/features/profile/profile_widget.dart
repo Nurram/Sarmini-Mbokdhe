@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/address/address_binding.dart';
 import 'package:sarmini_mbokdhe/features/address/address_screen.dart';
@@ -37,11 +37,15 @@ class ProfileWidget extends GetView<ProfileController> {
                         _buildItem(
                             icon: Icons.location_on_outlined,
                             label: 'Alamat Pengiriman',
-                            onTap: () {
-                              Get.to(
-                                () => const AddressScreen(),
-                                binding: AddressBinding(),
-                              );
+                            onTap: () async {
+                              if (await Permission.location
+                                  .request()
+                                  .isGranted) {
+                                Get.to(
+                                  () => const AddressScreen(),
+                                  binding: AddressBinding(),
+                                );
+                              }
                             }),
                         _buildItem(
                           icon: Icons.person_outline,
