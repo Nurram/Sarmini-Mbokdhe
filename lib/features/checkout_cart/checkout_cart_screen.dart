@@ -143,8 +143,6 @@ class CheckoutCartScreen extends GetView<CheckoutCartController> {
   }
 
   Widget _buildAddress() {
-    final address = controller.address.value;
-
     return Padding(
       padding: EdgeInsets.all(16.dp),
       child: Column(
@@ -175,7 +173,7 @@ class CheckoutCartScreen extends GetView<CheckoutCartController> {
               SizedBox(width: 8.dp),
               Expanded(
                 child: Text(
-                  '${address?.receipient} | ${address?.phoneNumber}',
+                  '${controller.address.value?.receipient} | ${controller.address.value?.phoneNumber}',
                   style: CustomTextStyle.black(),
                 ),
               )
@@ -319,6 +317,8 @@ class CheckoutCartScreen extends GetView<CheckoutCartController> {
           () => RadioListTile(
             value: 'Saldo',
             title: const Text('Saldo'),
+            subtitle: Text(
+                'Saldo anda: Rp${Utils.numberFormat(controller.user.value!.balance)}'),
             fillColor: MaterialStateProperty.all(CustomColors.primaryColor),
             groupValue: controller.selectedPayment.value,
             onChanged: (value) => controller.selectedPayment(value),

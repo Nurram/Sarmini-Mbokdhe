@@ -140,8 +140,6 @@ class CheckoutScreen extends GetView<CheckoutController> {
   }
 
   Widget _buildAddress() {
-    final address = controller.address.value;
-
     return InkWell(
       onTap: () {
         controller.showAddressBottomSheet(context: Get.context!);
@@ -177,7 +175,7 @@ class CheckoutScreen extends GetView<CheckoutController> {
                   SizedBox(width: 8.dp),
                   Expanded(
                     child: Text(
-                      '${address?.receipient} | ${address?.phoneNumber}',
+                      '${controller.address.value?.receipient} | ${controller.address.value?.phoneNumber}',
                       style: CustomTextStyle.black(),
                     ),
                   )
@@ -324,6 +322,8 @@ class CheckoutScreen extends GetView<CheckoutController> {
         Obx(
           () => RadioListTile(
             value: 'Saldo',
+            subtitle: Text(
+                'Saldo anda: Rp${Utils.numberFormat(controller.user.value!.balance)}'),
             title: const Text('Saldo'),
             fillColor: MaterialStateProperty.all(CustomColors.primaryColor),
             groupValue: controller.selectedPayment.value,

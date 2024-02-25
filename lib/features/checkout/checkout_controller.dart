@@ -23,6 +23,7 @@ class CheckoutController extends BaseController {
   final voucherNode = FocusNode();
   final notesCtr = TextEditingController();
 
+  final Rx<User?> user = Rx(null);
   final Rx<ProductDatum?> selectedProduct = Rx(null);
   final Rx<VoucherDatum?> selectedVoucher = Rx(null);
   final Rx<AddressDatum?> address = Rx(null);
@@ -200,6 +201,7 @@ class CheckoutController extends BaseController {
           'userId': user.value!.id,
           'amount': _calculateTotal(),
         });
+        
         final userData = UserResponse.fromJson(response);
         await setCurrentLoggedInUser(userData.user);
 
@@ -225,9 +227,10 @@ class CheckoutController extends BaseController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     address(homeController.selectedAddress.value);
     selectedProduct(detailController.selectedProduct.value);
+    user((await getCurrentLoggedInUser()).value);
 
     if (address.value == null) {
       address(homeController.addresses.first);

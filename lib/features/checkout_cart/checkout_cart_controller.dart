@@ -22,6 +22,7 @@ class CheckoutCartController extends BaseController {
   final voucherNode = FocusNode();
   final notesCtr = TextEditingController();
 
+  final Rx<User?> user = Rx(null);
   final carts = <CartDatum>[].obs;
   final Rx<VoucherDatum?> selectedVoucher = Rx(null);
   final Rx<AddressDatum?> address = Rx(null);
@@ -249,9 +250,10 @@ class CheckoutCartController extends BaseController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     address(homeController.selectedAddress.value);
     carts(Get.arguments);
+    user((await getCurrentLoggedInUser()).value);
 
     if (address.value == null) {
       address(homeController.addresses.first);

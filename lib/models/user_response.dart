@@ -25,7 +25,7 @@ class UserResponse {
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         code: json["code"],
         message: json["message"],
-        user: User.fromJson(json["user"]),
+        user: User.fromJson(json["data"]),
         token: json["token"],
       );
 
