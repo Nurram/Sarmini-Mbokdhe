@@ -5,11 +5,14 @@ import 'package:sarmini_mbokdhe/features/address/address_binding.dart';
 import 'package:sarmini_mbokdhe/features/address/address_screen.dart';
 import 'package:sarmini_mbokdhe/features/dashboard/dashboard_binding.dart';
 import 'package:sarmini_mbokdhe/features/dashboard/dashboard_screen.dart';
+import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_binding.dart';
+import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_screen.dart';
 import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
 import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/features/profile/profile_controller.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 import 'package:sarmini_mbokdhe/widgets/custom_divider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ProfileWidget extends GetView<ProfileController> {
   const ProfileWidget({super.key});
@@ -25,80 +28,95 @@ class ProfileWidget extends GetView<ProfileController> {
         children: [
           const CustomDivider(),
           Expanded(
-            child: Obx(
-              () => ListView(
-                children: [
-                  _buildHeader(),
-                  const CustomDivider(height: 8),
-                  Visibility(
-                    visible: controller.user.value != null,
-                    child: Column(
-                      children: [
-                        _buildItem(
-                            icon: Icons.location_on_outlined,
-                            label: 'Alamat Pengiriman',
-                            onTap: () async {
-                              if (await Permission.location
-                                  .request()
-                                  .isGranted) {
-                                Get.to(
-                                  () => const AddressScreen(),
-                                  binding: AddressBinding(),
-                                );
-                              }
-                            }),
-                        _buildItem(
-                          icon: Icons.person_outline,
-                          label: 'Edit Profile',
-                          onTap: () {},
-                        ),
-                        const CustomDivider(height: 8),
-                        _buildItem(
-                            icon: Icons.credit_card,
-                            label: 'Topup',
-                            onTap: () {}),
-                        const CustomDivider(height: 8),
-                        _buildItem(
-                            icon: Icons.email_outlined,
-                            label: 'Kontak Kami',
-                            onTap: () {}),
-                        _buildItem(
-                            icon: Icons.privacy_tip_outlined,
-                            label: 'Privacy Policy',
-                            onTap: () {}),
-                        _buildItem(
-                            icon: Icons.info_outline,
-                            label: 'About',
-                            onTap: () {}),
-                        const CustomDivider(height: 8),
-                        InkWell(
-                          onTap: () async {
-                            controller.logout();
-
-                            Get.offAll(
-                              () => const DashboardScreen(),
-                              binding: DashboardBinding(),
-                            );
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(16.dp),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.exit_to_app,
-                                    color: CustomColors.errorColor),
-                                SizedBox(width: 8.dp),
-                                Text(
-                                  'Logout',
-                                  style: CustomTextStyle.red14w400(),
-                                ),
-                              ],
+            child: RefreshIndicator(
+              onRefresh: () => controller.getLoggedInUser(),
+              child: Obx(
+                () => Skeletonizer(
+                  enabled: controller.isLoading.value,
+                  child: ListView(
+                    children: [
+                      _buildHeader(),
+                      const CustomDivider(height: 8),
+                      Visibility(
+                        visible: controller.user.value != null,
+                        child: Column(
+                          children: [
+                            _buildItem(
+                                icon: Icons.location_on_outlined,
+                                label: 'Alamat Pengiriman',
+                                onTap: () async {
+                                  if (await Permission.location
+                                      .request()
+                                      .isGranted) {
+                                    Get.to(
+                                      () => const AddressScreen(),
+                                      binding: AddressBinding(),
+                                    );
+                                  }
+                                }),
+                            _buildItem(
+                              icon: Icons.person_outline,
+                              label: 'Edit Profile',
+                              onTap: () {
+                                Get.to(() => const EditProfileScreen(),
+                                        binding: EditProfileBinding(),
+                                        arguments: controller.user.value)
+                                    ?.then((value) {
+                                  if (value != null) {
+                                    controller.getLoggedInUser();
+                                  }
+                                });
+                              },
                             ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                            const CustomDivider(height: 8),
+                            _buildItem(
+                                icon: Icons.credit_card,
+                                label: 'Topup',
+                                onTap: () {}),
+                            const CustomDivider(height: 8),
+                            _buildItem(
+                                icon: Icons.email_outlined,
+                                label: 'Kontak Kami',
+                                onTap: () {}),
+                            _buildItem(
+                                icon: Icons.privacy_tip_outlined,
+                                label: 'Privacy Policy',
+                                onTap: () {}),
+                            _buildItem(
+                                icon: Icons.info_outline,
+                                label: 'About',
+                                onTap: () {}),
+                            const CustomDivider(height: 8),
+                            InkWell(
+                              onTap: () async {
+                                controller.logout();
+
+                                Get.offAll(
+                                  () => const DashboardScreen(),
+                                  binding: DashboardBinding(),
+                                );
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(16.dp),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.exit_to_app,
+                                        color: CustomColors.errorColor),
+                                    SizedBox(width: 8.dp),
+                                    Text(
+                                      'Logout',
+                                      style: CustomTextStyle.red14w400(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -129,7 +147,7 @@ class ProfileWidget extends GetView<ProfileController> {
               alignment: Alignment.topLeft,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(99),
-                child: userNotNull && user.image.isNotEmpty
+                child: userNotNull && user.image != null
                     ? Image.network(
                         '${ApiProvider().baseUrl}/${user.image}',
                         width: 80.dp,

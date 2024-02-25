@@ -70,7 +70,11 @@ class CustomTextFormField extends StatelessWidget {
               : maxLines,
           decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
+            fillColor: readOnly != null
+                ? readOnly!
+                    ? Colors.grey.shade100
+                    : Colors.white
+                : Colors.white,
             hintText: hint,
             prefix: Text(prefix ?? ''),
             suffix: Text(suffix ?? ''),

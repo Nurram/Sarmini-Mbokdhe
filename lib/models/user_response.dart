@@ -40,10 +40,10 @@ class UserResponse {
 class User {
   int id;
   String phone;
-  String firstname;
-  String lastname;
-  String email;
-  String image;
+  String? firstname;
+  String? lastname;
+  String? email;
+  String? image;
   int balance;
   dynamic createdAt;
   dynamic updatedAt;
