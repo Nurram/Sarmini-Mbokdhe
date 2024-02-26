@@ -166,6 +166,14 @@ abstract class CustomTextStyle {
     );
   }
 
+  static TextStyle black20w600() {
+    return GoogleFonts.inter(
+      fontSize: 20.dp,
+      fontWeight: FontWeight.w600,
+      color: Colors.black87,
+    );
+  }
+
   static TextStyle black20w700() {
     return GoogleFonts.inter(
       fontSize: 20.dp,
@@ -524,6 +532,14 @@ abstract class CustomTextStyle {
     return GoogleFonts.inter(
       fontSize: 14.dp,
       fontWeight: FontWeight.w700,
+      color: Colors.grey.shade700,
+    );
+  }
+
+  static TextStyle grey16w400() {
+    return GoogleFonts.inter(
+      fontSize: 16.dp,
+      fontWeight: FontWeight.w400,
       color: Colors.grey.shade700,
     );
   }

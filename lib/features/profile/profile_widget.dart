@@ -10,6 +10,8 @@ import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_screen.dart';
 import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
 import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/features/profile/profile_controller.dart';
+import 'package:sarmini_mbokdhe/features/topup/topup_binding.dart';
+import 'package:sarmini_mbokdhe/features/topup/topup_screen.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 import 'package:sarmini_mbokdhe/widgets/custom_divider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -72,7 +74,12 @@ class ProfileWidget extends GetView<ProfileController> {
                             _buildItem(
                                 icon: Icons.credit_card,
                                 label: 'Topup',
-                                onTap: () {}),
+                                onTap: () {
+                                  Get.to(
+                                    () => const TopupScreen(),
+                                    binding: TopupBinding(),
+                                  );
+                                }),
                             const CustomDivider(height: 8),
                             _buildItem(
                                 icon: Icons.email_outlined,
