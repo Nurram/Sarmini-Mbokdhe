@@ -15,6 +15,7 @@ class OrderRequest {
   String? image;
   String paymentMethod;
   String serviceFee;
+  String phone;
   int? voucherId;
   int? voucherAmount;
   String? notes;
@@ -28,6 +29,7 @@ class OrderRequest {
     required this.image,
     required this.paymentMethod,
     required this.serviceFee,
+    required this.phone,
     required this.voucherId,
     required this.voucherAmount,
     required this.notes
@@ -40,6 +42,7 @@ class OrderRequest {
         "destination": destination,
         "status": status,
         "image": image,
+        "phone": phone,
         "paymentMethod": paymentMethod,
         "serviceFee": serviceFee,
         "voucherId": voucherId,

@@ -103,7 +103,7 @@ class ChatRoomController extends BaseController {
     userId = user.value!.id;
 
     productId = Get.arguments;
-    channelName = 'chat.$productId';
+    channelName = 'chat.$userId-$productId';
 
     await _initPusher();
     await getChats();

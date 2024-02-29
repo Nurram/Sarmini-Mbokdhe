@@ -166,6 +166,7 @@ class CheckoutController extends BaseController {
         image: null,
         paymentMethod: selectedPayment.value,
         serviceFee: serviceFee.value,
+        phone: user.value!.phone,
         voucherId: selectedVoucher.value?.id,
         voucherAmount: selectedVoucher.value?.amount,
         notes: notesCtr.text,
