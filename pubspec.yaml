@@ -52,6 +52,7 @@ dependencies:
   google_maps_flutter: ^2.5.3
   permission_handler: ^11.3.0
   pusher_channels_flutter: ^2.2.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -106,3 +107,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  image_path: 'assets/images/logo.png'
+  android: true
+  ios: true

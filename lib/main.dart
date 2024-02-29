@@ -1,5 +1,4 @@
 import 'package:flutter_sizer/flutter_sizer.dart';
-import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:sarmini_mbokdhe/features/splash/splash_screen.dart';
 
 import 'core_imports.dart';
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterSizer(
       builder: (p0, p1, p2) => GetMaterialApp(
-        title: 'Sarmini Mbokdhe',
+        title: 'Pasarmini Mbokdhe',
         theme: ThemeData(
           primarySwatch: CustomColors.getPrimarySwatch(),
         ),
