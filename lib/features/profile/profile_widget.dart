@@ -5,6 +5,8 @@ import 'package:sarmini_mbokdhe/features/address/address_binding.dart';
 import 'package:sarmini_mbokdhe/features/address/address_screen.dart';
 import 'package:sarmini_mbokdhe/features/dashboard/dashboard_binding.dart';
 import 'package:sarmini_mbokdhe/features/dashboard/dashboard_screen.dart';
+import 'package:sarmini_mbokdhe/features/discussion/discussion_binding.dart';
+import 'package:sarmini_mbokdhe/features/discussion/discussion_screen.dart';
 import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_binding.dart';
 import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_screen.dart';
 import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
@@ -74,14 +76,10 @@ class ProfileWidget extends GetView<ProfileController> {
                               icon: Icons.messenger_outline_sharp,
                               label: 'Diskusi',
                               onTap: () {
-                                Get.to(() => const EditProfileScreen(),
-                                        binding: EditProfileBinding(),
-                                        arguments: controller.user.value)
-                                    ?.then((value) {
-                                  if (value != null) {
-                                    controller.getLoggedInUser();
-                                  }
-                                });
+                                Get.to(
+                                  () => const DiscussionScreen(),
+                                  binding: DiscussionBinding(),
+                                );
                               },
                             ),
                             const CustomDivider(height: 8),

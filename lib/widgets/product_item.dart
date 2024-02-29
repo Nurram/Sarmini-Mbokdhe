@@ -1,5 +1,7 @@
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
+import 'package:sarmini_mbokdhe/features/discussion_room/discussion_room_binding.dart';
+import 'package:sarmini_mbokdhe/features/discussion_room/discussion_room_screen.dart';
 import 'package:sarmini_mbokdhe/features/product_detail/product_detail_binding.dart';
 import 'package:sarmini_mbokdhe/features/product_detail/product_detail_screen.dart';
 import 'package:sarmini_mbokdhe/models/product_response.dart';
@@ -8,8 +10,14 @@ import 'package:sarmini_mbokdhe/network/api_provider.dart';
 class ProductItem extends StatelessWidget {
   final int index;
   final ProductDatum? datum;
+  final bool isToDetail;
 
-  const ProductItem({super.key, required this.index, required this.datum});
+  const ProductItem({
+    super.key,
+    required this.index,
+    required this.datum,
+    this.isToDetail = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +28,13 @@ class ProductItem extends StatelessWidget {
       height: 240.dp,
       child: InkWell(
         onTap: () {
-          Get.to(() => const ProductDetailScreen(),
-              binding: ProductDetailBinding(), arguments: datum);
+          if (isToDetail) {
+            Get.to(() => const ProductDetailScreen(),
+                binding: ProductDetailBinding(), arguments: datum);
+          } else {
+            Get.to(() => const DiscussionRoomScreen(),
+                binding: DiscussionRoomBinding(), arguments: datum!.id);
+          }
         },
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
