@@ -2,6 +2,7 @@ import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_binding.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_screen.dart';
+import 'package:sarmini_mbokdhe/features/chat_list/chat_list_screen.dart';
 import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
 import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
 import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
@@ -17,6 +18,7 @@ import 'package:sarmini_mbokdhe/widgets/product_item.dart';
 import 'package:sarmini_mbokdhe/widgets/search_textfield.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../chat_list/chat_list_binding.dart';
 import '../vouchers/voucher_binding.dart';
 
 class HomeWidget extends GetView<HomeController> {
@@ -127,8 +129,8 @@ class HomeWidget extends GetView<HomeController> {
                       );
                     } else {
                       Get.to(
-                        () => const CartScreen(),
-                        binding: CartBinding(),
+                        () => const ChatListScreen(),
+                        binding: ChatListBinding(),
                       );
                     }
                   },

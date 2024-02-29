@@ -7,6 +7,8 @@ import 'package:sarmini_mbokdhe/network/api_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../widgets/custom_divider.dart';
+import '../chat_room/chat_room_binding.dart';
+import '../chat_room/chat_room_screen.dart';
 
 class ProductDetailScreen extends GetView<ProductDetailController> {
   const ProductDetailScreen({super.key});
@@ -47,12 +49,19 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
           Row(
             children: [
               _buildButtons(
-                  outlined: true,
-                  child: const Icon(
-                    Icons.chat_outlined,
-                    color: CustomColors.primaryColor,
-                  ),
-                  onTap: () {}),
+                outlined: true,
+                child: const Icon(
+                  Icons.chat_outlined,
+                  color: CustomColors.primaryColor,
+                ),
+                onTap: () {
+                  Get.to(
+                    () => const ChatRoomScreen(),
+                    binding: ChatRoomBinding(),
+                    arguments: controller.selectedProduct.value!.id,
+                  );
+                },
+              ),
               Container(
                 width: .5.dp,
                 height: 48.dp,

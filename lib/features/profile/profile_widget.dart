@@ -70,6 +70,20 @@ class ProfileWidget extends GetView<ProfileController> {
                                 });
                               },
                             ),
+                            _buildItem(
+                              icon: Icons.messenger_outline_sharp,
+                              label: 'Diskusi',
+                              onTap: () {
+                                Get.to(() => const EditProfileScreen(),
+                                        binding: EditProfileBinding(),
+                                        arguments: controller.user.value)
+                                    ?.then((value) {
+                                  if (value != null) {
+                                    controller.getLoggedInUser();
+                                  }
+                                });
+                              },
+                            ),
                             const CustomDivider(height: 8),
                             _buildItem(
                                 icon: Icons.credit_card,

@@ -70,15 +70,15 @@ class HomeController extends BaseController {
     isLoading(true);
 
     try {
+      if (loggedInUser.value != null) {
+        await getAddress();
+      }
+
       final voucherResult = await ApiProvider().get(endpoint: '/vouchers');
       final categoryResult = await ApiProvider().get(endpoint: '/categories');
       final productResult =
           await ApiProvider().get(endpoint: '/products/newest');
       await getConstants();
-
-      if (loggedInUser.value != null) {
-        await getAddress();
-      }
 
       vouchers(
         VoucherResponse.fromJson(voucherResult).data,
