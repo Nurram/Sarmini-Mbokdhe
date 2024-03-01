@@ -5,7 +5,7 @@ import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/network/interceptor.dart';
 
 class ApiProvider {
-  final baseUrl = 'http://10.0.2.2:8000';
+  final baseUrl = 'http://admin.sarminimbokdhe.com';
   final headers = {
     'Connection': 'Keep-Alive',
     'Accept': 'application/json',
@@ -14,7 +14,7 @@ class ApiProvider {
 
   final Dio _dio = Dio(
     BaseOptions(
-        baseUrl: 'http://10.0.2.2:8000/api',
+        baseUrl: 'http://admin.sarminimbokdhe.com/api',
         receiveTimeout: const Duration(seconds: 15),
         connectTimeout: const Duration(seconds: 15),
         headers: {'Connection': 'Keep-Alive', 'Accept': 'application/json'},
