@@ -12,6 +12,8 @@ import 'package:sarmini_mbokdhe/features/eit_profile/edit_profile_screen.dart';
 import 'package:sarmini_mbokdhe/features/login/login_binding.dart';
 import 'package:sarmini_mbokdhe/features/login/login_screen.dart';
 import 'package:sarmini_mbokdhe/features/profile/profile_controller.dart';
+import 'package:sarmini_mbokdhe/features/profile_web.dart';
+import 'package:sarmini_mbokdhe/features/splash/splash_screen.dart';
 import 'package:sarmini_mbokdhe/features/topup/topup_binding.dart';
 import 'package:sarmini_mbokdhe/features/topup/topup_screen.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
@@ -96,23 +98,43 @@ class ProfileWidget extends GetView<ProfileController> {
                             _buildItem(
                                 icon: Icons.email_outlined,
                                 label: 'Kontak Kami',
-                                onTap: () {}),
+                                onTap: () {
+                                  Get.to(
+                                    () => ProfileWeb(
+                                        url: controller
+                                            .getConstant(name: 'contactUrl')
+                                            .value),
+                                  );
+                                }),
                             _buildItem(
                                 icon: Icons.privacy_tip_outlined,
                                 label: 'Privacy Policy',
-                                onTap: () {}),
+                                onTap: () {
+                                  Get.to(
+                                    () => ProfileWeb(
+                                        url: controller
+                                            .getConstant(name: 'privacyUrl')
+                                            .value),
+                                  );
+                                }),
                             _buildItem(
                                 icon: Icons.info_outline,
                                 label: 'About',
-                                onTap: () {}),
+                                onTap: () {
+                                  Get.to(
+                                    () => ProfileWeb(
+                                        url: controller
+                                            .getConstant(name: 'aboutUrl')
+                                            .value),
+                                  );
+                                }),
                             const CustomDivider(height: 8),
                             InkWell(
                               onTap: () async {
-                                controller.logout();
+                                await controller.logout();
 
                                 Get.offAll(
-                                  () => const DashboardScreen(),
-                                  binding: DashboardBinding(),
+                                  () => const SplashScreen(),
                                 );
                               },
                               child: Padding(
@@ -190,7 +212,7 @@ class ProfileWidget extends GetView<ProfileController> {
               children: [
                 Text(
                   userNotNull
-                      ? '${user.firstname} ${user.lastname}'
+                      ? '${user.firstname ?? 'User Sarmini'} ${user.lastname ?? ''}'
                       : 'Silahkan masuk ke akun anda disini',
                   style: CustomTextStyle.black13w400(),
                 ),

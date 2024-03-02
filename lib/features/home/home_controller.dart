@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
-import 'package:sarmini_mbokdhe/models/user_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
 import '../../models/category_response.dart';
@@ -16,7 +15,6 @@ class HomeController extends BaseController {
   final Rx<AddressDatum?> selectedAddress = Rx(null);
   final selectedAddressId = (-1).obs;
 
-  final Rx<User?> loggedInUser = Rx(null);
   final addresses = <AddressDatum>[].obs;
   final vouchers = <VoucherDatum>[].obs;
   final categories = <CategoryDatum>[].obs;
@@ -70,7 +68,7 @@ class HomeController extends BaseController {
     isLoading(true);
 
     try {
-      if (loggedInUser.value != null) {
+      if (userController.loggedInUser.value != null) {
         await getAddress();
       }
 
@@ -95,12 +93,14 @@ class HomeController extends BaseController {
 
       isLoading(false);
     } catch (e) {
-      Utils.showGetSnackbar(e.toString(), false);
+      if (!e.toString().contains('Unauthenticated')) {
+        Utils.showGetSnackbar(e.toString(), false);
+      }
     }
   }
 
   getAddress() async {
-    final user = loggedInUser.value!;
+    final user = userController.loggedInUser.value!;
     final addressResult = await ApiProvider()
         .post(endpoint: '/address', body: {'userId': user.id});
 
@@ -143,9 +143,6 @@ class HomeController extends BaseController {
   @override
   void onInit() async {
     isLoading(true);
-
-    final userCtr = Get.find<UserController>();
-    loggedInUser(await userCtr.getCurrentLoggedInUser());
 
     // final addressJson =
     //     await Utils.readFromSecureStorage(key: Constants.address);

@@ -55,10 +55,10 @@ class EditProfileScreen extends GetView<EditProfileController> {
                         decoration: BoxDecoration(
                             color: CustomColors.primaryColor.withAlpha(80),
                             borderRadius: BorderRadius.circular(8)),
-                        child: const Column(
+                        child: Column(
                           children: [
-                            Icon(Icons.add),
-                            Text('Silahkan pilih gambar')
+                            const Icon(Icons.add),
+                            Text(controller.imageMsg.value)
                           ],
                         ),
                       )

@@ -1,4 +1,6 @@
 import 'package:sarmini_mbokdhe/core_imports.dart';
+import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
+import 'package:sarmini_mbokdhe/models/constants.response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
 import '../../models/user_response.dart';
@@ -28,6 +30,10 @@ class ProfileController extends BaseController {
       isLoading(false);
       Utils.showGetSnackbar(e.toString(), false);
     }
+  }
+
+  ConstantsDatum getConstant({required String name}) {
+    return Get.find<HomeController>().constants.firstWhere((element) => element.name == name);
   }
 
   @override

@@ -13,6 +13,7 @@ class EditProfileController extends BaseController {
   final emailCtr = TextEditingController();
   final phoneCtr = TextEditingController();
 
+  final imageMsg = 'Silahkan pilih gambar'.obs;
   final Rx<XFile?> selectedImage = Rx(null);
 
   pickImage() async {
