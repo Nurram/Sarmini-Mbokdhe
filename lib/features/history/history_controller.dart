@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/order_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
@@ -28,6 +30,7 @@ class HistoryController extends BaseController {
       final user = await getCurrentLoggedInUser();
       final historyResponse = await ApiProvider()
           .post(endpoint: '/orders', body: {'userId': user.value!.id});
+      print(jsonEncode(historyResponse));
       final history = OrderResponse.fromJson(historyResponse);
 
       masterHistories(history.data);

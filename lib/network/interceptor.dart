@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -8,11 +9,11 @@ class CustomInterceptor extends InterceptorsWrapper {
     log('================= ERROR =================');
     log('${err.response}', name: 'ERROR:');
     log('=============== END ERROR ===============');
-    
+
     final response = err.response;
     String? message = err.message;
 
-    if(response != null) {
+    if (response != null) {
       message = response.data['message'];
     }
 
@@ -40,7 +41,7 @@ class CustomInterceptor extends InterceptorsWrapper {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     log('================= RESPONSE =================');
-    log('${response.data}', name: 'RESPONSE:');
+    log(jsonEncode(response.data), name: 'RESPONSE:');
     log('=============== END RESPONSE ===============');
 
     handler.next(response);

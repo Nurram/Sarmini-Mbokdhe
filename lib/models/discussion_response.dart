@@ -27,7 +27,8 @@ class DiscussionResponse {
       DiscussionResponse(
         code: json["code"],
         success: json["success"],
-        data: List<DiscussionDatum>.from(json["data"].map((x) => DiscussionDatum.fromJson(x))),
+        data: List<DiscussionDatum>.from(
+            json["data"].map((x) => DiscussionDatum.fromJson(x))),
         message: json["message"],
       );
 
@@ -56,10 +57,15 @@ class DiscussionDatum {
     required this.updatedAt,
   });
 
-  factory DiscussionDatum.fromJson(Map<String, dynamic> json) => DiscussionDatum(
+  factory DiscussionDatum.fromJson(Map<String, dynamic> json) =>
+      DiscussionDatum(
         id: json["id"],
-        userId: json["userId"],
-        productId: json["productId"],
+        userId: json["userId"] is String
+            ? int.parse(json["userId"])
+            : json["userId"],
+        productId: json["productId"] is String
+            ? int.parse(json["productId"])
+            : json["productId"],
         message: json["message"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],

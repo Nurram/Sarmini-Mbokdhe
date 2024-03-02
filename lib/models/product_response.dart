@@ -7,7 +7,8 @@ import 'dart:convert';
 ProductResponse productResponseFromJson(String str) =>
     ProductResponse.fromJson(json.decode(str));
 
-String productResponseToJson(ProductResponse data) => json.encode(data.toJson());
+String productResponseToJson(ProductResponse data) =>
+    json.encode(data.toJson());
 
 class ProductResponse {
   int code;
@@ -22,10 +23,12 @@ class ProductResponse {
     required this.message,
   });
 
-  factory ProductResponse.fromJson(Map<String, dynamic> json) => ProductResponse(
+  factory ProductResponse.fromJson(Map<String, dynamic> json) =>
+      ProductResponse(
         code: json["code"],
         success: json["success"],
-        data: List<ProductDatum>.from(json["data"].map((x) => ProductDatum.fromJson(x))),
+        data: List<ProductDatum>.from(
+            json["data"].map((x) => ProductDatum.fromJson(x))),
         message: json["message"],
       );
 
@@ -69,13 +72,13 @@ class ProductDatum {
   factory ProductDatum.fromJson(Map<String, dynamic> json) => ProductDatum(
         id: json["id"],
         name: json["name"],
-        price: json["price"],
-        categoryId: json["categoryId"],
+        price: int.parse(json["price"]),
+        categoryId: int.parse(json["categoryId"]),
         description: json["description"],
         file: json["file"],
-        isFreeService: json["isFreeService"],
+        isFreeService: int.parse(json["isFreeService"]),
         weight: json["weight"],
-        stock: json["stock"],
+        stock: int.parse(json["stock"]),
         unit: json["unit"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],

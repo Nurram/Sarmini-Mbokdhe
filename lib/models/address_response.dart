@@ -42,7 +42,7 @@ class AddressResponse {
 
 class AddressDatum {
   int id;
-  int userId;
+  String userId;
   String name;
   String receipient;
   String phoneNumber;
@@ -52,7 +52,7 @@ class AddressDatum {
   String regency;
   String lat;
   String long;
-  int postalCode;
+  String postalCode;
   bool isPrimary;
   DateTime createdAt;
   dynamic updatedAt;
@@ -88,7 +88,7 @@ class AddressDatum {
         lat: json["lat"],
         long: json["long"],
         postalCode: json["postalCode"],
-        isPrimary: json["isPrimary"] == 1 ? true : false,
+        isPrimary: json["isPrimary"] == "1" ? true : false,
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
       );
@@ -106,7 +106,7 @@ class AddressDatum {
         "lat": lat,
         "long": long,
         "postalCode": postalCode,
-        "isPrimary": isPrimary ? 1 : 0,
+        "isPrimary": isPrimary ? "1" : "0",
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt,
       };

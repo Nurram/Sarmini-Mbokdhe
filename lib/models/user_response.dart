@@ -67,7 +67,9 @@ class User {
         lastname: json["lastname"],
         email: json["email"],
         image: json["image"],
-        balance: json["balance"],
+        balance: json["balance"] is String
+            ? int.parse(json["balance"])
+            : json["balance"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );
@@ -79,7 +81,7 @@ class User {
         "lastname": lastname,
         "email": email,
         "image": image,
-        "balance": balance,
+        "balance": balance.toString(),
         "created_at": createdAt,
         "updated_at": updatedAt,
       };

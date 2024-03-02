@@ -66,14 +66,14 @@ class CartDatum {
   });
 
   factory CartDatum.fromJson(Map<String, dynamic> json) => CartDatum(
-        id: json["id"],
-        productId: json["productId"],
-        userId: json["userId"],
+        id: int.parse(json["id"]),
+        productId: int.parse(json["productId"]),
+        userId: int.parse(json["userId"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
         name: json["name"],
         file: json["file"],
-        price: json["price"],
+        price: int.parse(json["price"]),
         unit: json["unit"],
       );
 

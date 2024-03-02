@@ -25,7 +25,8 @@ class OrderResponse {
   factory OrderResponse.fromJson(Map<String, dynamic> json) => OrderResponse(
         code: json["code"],
         success: json["success"],
-        data: List<OrderDatum>.from(json["data"].map((x) => OrderDatum.fromJson(x))),
+        data: List<OrderDatum>.from(
+            json["data"].map((x) => OrderDatum.fromJson(x))),
         message: json["message"],
       );
 
@@ -72,8 +73,12 @@ class OrderDatum {
 
   factory OrderDatum.fromJson(Map<String, dynamic> json) => OrderDatum(
         id: json["id"],
-        userId: json["userId"],
-        totalPrice: json["totalPrice"],
+        userId: json["userId"] is String
+            ? int.parse(json['userId'])
+            : json['userId'],
+        totalPrice: json["totalPrice"] is String
+            ? int.parse(json['totalPrice'])
+            : json['totalPrice'],
         destination: json["destination"],
         status: json["status"],
         image: json["image"],
@@ -145,19 +150,19 @@ class OrderProduct {
 
   factory OrderProduct.fromJson(Map<String, dynamic> json) => OrderProduct(
         id: json["id"],
-        orderId: json["orderId"],
-        productId: json["productId"],
-        qty: json["qty"],
+        orderId: int.parse(json["orderId"]),
+        productId: int.parse(json["productId"]),
+        qty: int.parse(json["qty"]),
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         name: json["name"],
-        price: json["price"],
-        categoryId: json["categoryId"],
+        price: int.parse(json["price"]),
+        categoryId: int.parse(json["categoryId"]),
         description: json["description"],
         file: json["file"],
-        isFreeService: json["isFreeService"],
+        isFreeService: int.parse(json["isFreeService"]),
         weight: json["weight"],
-        stock: json["stock"],
+        stock: int.parse(json["stock"]),
         unit: json["unit"],
       );
 

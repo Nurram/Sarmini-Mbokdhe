@@ -35,14 +35,19 @@ class PaymentController extends BaseController {
 
     try {
       final selectedImage = this.selectedImage.value!;
+      final file = await MultipartFile.fromFile(
+        selectedImage.path,
+        filename: selectedImage.name,
+      );
+
       final formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(selectedImage.path,
-            filename: selectedImage.name),
-        'orderId': getOrder!.id,
+        'file': file,
+        'orderId': getOrder!.id.toString(),
         'status': 'Waiting'
       });
 
-      await ApiProvider().post(endpoint: '/orders/upload', body: formData);
+      await ApiProvider()
+          .postMultipart(endpoint: '/orders/upload', body: formData);
       final user = await getCurrentLoggedInUser();
       final response =
           await ApiProvider().post(endpoint: '/users/deduct', body: {

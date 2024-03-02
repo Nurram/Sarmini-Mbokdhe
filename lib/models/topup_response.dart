@@ -59,8 +59,12 @@ class TopupDatum {
 
   factory TopupDatum.fromJson(Map<String, dynamic> json) => TopupDatum(
         id: json["id"],
-        userId: json["userId"],
-        amount: json["amount"],
+        userId: json["userId"] is String
+            ? int.parse(json["userId"])
+            : json["userId"],
+        amount: json["amount"] is String
+            ? int.parse(json["amount"])
+            : json["amount"],
         image: json["image"] ?? '',
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),

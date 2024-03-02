@@ -7,7 +7,8 @@ import 'dart:convert';
 VoucherResponse voucherResponseFromJson(String str) =>
     VoucherResponse.fromJson(json.decode(str));
 
-String voucherResponseToJson(VoucherResponse data) => json.encode(data.toJson());
+String voucherResponseToJson(VoucherResponse data) =>
+    json.encode(data.toJson());
 
 class VoucherResponse {
   int code;
@@ -22,10 +23,12 @@ class VoucherResponse {
     required this.message,
   });
 
-  factory VoucherResponse.fromJson(Map<String, dynamic> json) => VoucherResponse(
+  factory VoucherResponse.fromJson(Map<String, dynamic> json) =>
+      VoucherResponse(
         code: json["code"],
         success: json["success"],
-        data: List<VoucherDatum>.from(json["data"].map((x) => VoucherDatum.fromJson(x))),
+        data: List<VoucherDatum>.from(
+            json["data"].map((x) => VoucherDatum.fromJson(x))),
         message: json["message"],
       );
 
@@ -72,8 +75,8 @@ class VoucherDatum {
         code: json["code"],
         description: json["description"],
         type: json["type"],
-        amount: json["amount"],
-        minimumTrx: json["minimumTrx"],
+        amount: int.parse(json["amount"]),
+        minimumTrx: int.parse(json["minimumTrx"]),
         validFrom: DateTime.parse(json["validFrom"]),
         validTo: DateTime.parse(json["validTo"]),
         image: json["image"],

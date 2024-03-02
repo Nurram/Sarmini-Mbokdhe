@@ -75,24 +75,27 @@ class HomeController extends BaseController {
       }
 
       final voucherResult = await ApiProvider().get(endpoint: '/vouchers');
-      final categoryResult = await ApiProvider().get(endpoint: '/categories');
-      final productResult =
-          await ApiProvider().get(endpoint: '/products/newest');
-      await getConstants();
 
       vouchers(
         VoucherResponse.fromJson(voucherResult).data,
       );
+
+      final categoryResult = await ApiProvider().get(endpoint: '/categories');
       categories(
         CategoryResponse.fromJson(categoryResult).data,
       );
+
+      final productResult =
+          await ApiProvider().get(endpoint: '/products/newest');
       products(
         ProductResponse.fromJson(productResult).data,
       );
 
+      await getConstants();
+
       isLoading(false);
     } catch (e) {
-      Utils.showGetSnackbar(e as String, false);
+      Utils.showGetSnackbar(e.toString(), false);
     }
   }
 
@@ -100,6 +103,7 @@ class HomeController extends BaseController {
     final user = loggedInUser.value!;
     final addressResult = await ApiProvider()
         .post(endpoint: '/address', body: {'userId': user.id});
+
     final adddress = AddressResponse.fromJson(addressResult);
 
     addresses(adddress.data);

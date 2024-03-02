@@ -66,13 +66,19 @@ class ChatListDatum {
 
   factory ChatListDatum.fromJson(Map<String, dynamic> json) => ChatListDatum(
         id: json["id"],
-        userId: json["userId"],
-        senderId: json["senderId"],
-        productId: json["productId"],
+        userId: json["userId"] is String
+            ? int.parse(json['userId'])
+            : json['userId'],
+        senderId: json["senderId"] is String
+            ? int.parse(json['senderId'])
+            : json['senderId'],
+        productId: json["productId"] is String
+            ? int.parse(json['productId'])
+            : json['productId'],
         message: json["message"],
         name: json["name"] ?? '',
         file: json["file"] ?? '',
-        isRead: json['isRead'] == 1,
+        isRead: json['isRead'] == "1",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null
             ? null

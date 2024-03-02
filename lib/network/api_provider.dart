@@ -58,6 +58,26 @@ class ApiProvider {
     }
   }
 
+  Future<dynamic> postMultipart({
+    required String endpoint,
+    required dynamic body,
+    String? token,
+  }) async {
+    try {
+      final token = await Utils.readFromSecureStorage(key: Constants.token);
+      headers['Authorization'] = 'Bearer $token';
+      headers['Content-Type'] = Headers.multipartFormDataContentType;
+      _dio.options.headers = headers;
+
+      final response = await _dio.post(endpoint, data: body);
+      return _handleResponse(response: response);
+    } on DioException catch (e) {
+      _handleError(e);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> delete({
     required String endpoint,
     required dynamic body,
@@ -95,6 +115,7 @@ class ApiProvider {
         );
       }
     }
+    print(e.toString());
     throw e.message ?? 'Something happened!';
   }
 }
