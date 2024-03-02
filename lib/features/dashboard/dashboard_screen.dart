@@ -16,6 +16,7 @@ class DashboardScreen extends GetView<DashboardController> {
         () => BottomNavigationBar(
             currentIndex: controller.pageIndex.value,
             selectedItemColor: CustomColors.primaryColor,
+            type: BottomNavigationBarType.fixed,
             onTap: (value) async {
               if (value != 0) {
                 if (await controller.isLoggedIn()) {
@@ -33,6 +34,8 @@ class DashboardScreen extends GetView<DashboardController> {
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined), label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_bag_outlined), label: 'Produk'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.history), label: 'Riwayat Pesanan'),
               BottomNavigationBarItem(
