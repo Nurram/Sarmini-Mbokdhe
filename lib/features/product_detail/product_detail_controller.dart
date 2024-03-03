@@ -118,6 +118,14 @@ class ProductDetailController extends BaseController {
     );
 
     final distance = Geolocator.distanceBetween(lat, long, lat2, long2) / 1000;
+
+    final maxDistance = homeCtr.constants
+        .firstWhere((element) => element.name == 'maxDistance');
+
+    if (distance > double.parse(maxDistance.value)) {
+      serviceFee('Pengiriman lebih dari ${maxDistance.value}km tidak didukung');
+    }
+
     final fee =
         constants.firstWhere((element) => element.name == 'feePerKm').value;
     final feeInt = int.parse(fee);

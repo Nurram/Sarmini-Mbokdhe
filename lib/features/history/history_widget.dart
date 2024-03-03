@@ -150,7 +150,9 @@ class HistoryWidget extends GetView<HistoryController> {
                                         ? Colors.blue
                                         : history.status == 'Waiting'
                                             ? CustomColors.primaryColor
-                                            : Colors.amber,
+                                            : history.status == 'Dibatalkan'
+                                                ? Colors.red
+                                                : Colors.amber,
                                     fontSize: 10.dp,
                                   ),
                                 ),

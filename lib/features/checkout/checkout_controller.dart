@@ -52,6 +52,16 @@ class CheckoutController extends BaseController {
 
     final distance =
         Geolocator.distanceBetween(fromLat, fromLong, toLat, toLong) / 1000;
+
+    final maxDistance = homeController.constants
+        .firstWhere((element) => element.name == 'maxDistance');
+
+    if (distance > double.parse(maxDistance.value)) {
+      Get.back();
+      Utils.showGetSnackbar(
+          'Pengiriman lebih dari ${maxDistance.value}km tidak didukung', false);
+    }
+
     final fee = homeController.constants
         .firstWhere((element) => element.name == 'feePerKm')
         .value;
