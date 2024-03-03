@@ -1,6 +1,5 @@
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
-import 'package:sarmini_mbokdhe/features/search_result/search_result_controller.dart';
 import 'package:sarmini_mbokdhe/widgets/product_item.dart';
 
 import 'products_controller.dart';

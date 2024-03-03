@@ -63,6 +63,13 @@ class CartScreen extends GetView<CartController> {
                                 onTap: () {
                                   if (controller.selectMode.value) {
                                     controller.setSelected(index: index);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('Tahan untuk proses'),
+                                      ),
+                                    );
                                   }
                                 },
                                 child: _buildCartItem(index: index),

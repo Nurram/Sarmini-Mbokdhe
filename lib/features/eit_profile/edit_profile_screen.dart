@@ -48,7 +48,8 @@ class EditProfileScreen extends GetView<EditProfileController> {
             InkWell(
               onTap: () => controller.pickImage(),
               child: Obx(
-                () => controller.user.image == null
+                () => controller.user.image == null &&
+                        controller.selectedImage.value == null
                     ? Container(
                         width: double.infinity,
                         padding: EdgeInsets.all(24.dp),

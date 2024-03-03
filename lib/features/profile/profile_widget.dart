@@ -171,7 +171,7 @@ class ProfileWidget extends GetView<ProfileController> {
     final userNotNull = user != null;
 
     return InkWell(
-      onTap: userNotNull
+      onTap: !userNotNull
           ? () {
               Get.to(
                 () => const LoginScreen(),
