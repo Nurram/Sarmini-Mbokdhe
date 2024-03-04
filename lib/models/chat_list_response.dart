@@ -65,7 +65,7 @@ class ChatListDatum {
   });
 
   factory ChatListDatum.fromJson(Map<String, dynamic> json) => ChatListDatum(
-        id: json["id"],
+        id: json["id"] is String ? int.parse(json["id"]) : json["id"],
         userId: json["userId"] is String
             ? int.parse(json['userId'])
             : json['userId'],
