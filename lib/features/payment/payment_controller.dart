@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
-import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
 import 'package:sarmini_mbokdhe/models/order_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../../models/constants.response.dart';
 import '../../models/user_response.dart';
 
 class PaymentController extends BaseController {
@@ -12,6 +12,7 @@ class PaymentController extends BaseController {
   OrderDatum? get getOrder => selectedOrder.value;
 
   final Rx<XFile?> selectedImage = Rx(null);
+  final constants = <ConstantsDatum>[].obs; 
 
   final bankName = ''.obs;
   final bankNo = ''.obs;
@@ -22,6 +23,21 @@ class PaymentController extends BaseController {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       selectedImage(pickedImage);
+    }
+  }
+
+  _getConstants() async {
+    isLoading(true);
+
+    try {
+      final constantsResponse = await ApiProvider().get(endpoint: '/constants');
+      final constants = ConstantsResponse.fromJson(constantsResponse);
+
+      this.constants(constants.data);
+      isLoading(false);
+    } catch (e) {
+      isLoading(false);
+      Utils.showGetSnackbar(e.toString(), false);
     }
   }
 
@@ -70,8 +86,8 @@ class PaymentController extends BaseController {
   void onInit() async {
     selectedOrder(Get.arguments);
 
-    final homeCtr = Get.find<HomeController>();
-    final constants = homeCtr.constants;
+    await _getConstants();
+
     bankName(
         constants.firstWhere((element) => element.name == 'bankName').value);
     bankNo(

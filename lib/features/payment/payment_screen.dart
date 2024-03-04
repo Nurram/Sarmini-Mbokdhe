@@ -67,20 +67,30 @@ class PaymentScreen extends GetView<PaymentController> {
                       SizedBox(height: 12.dp),
                       Row(
                         children: [
-                          Image.asset(
-                            'assets/images/bank.png',
-                            width: 30.w,
-                          ),
+                          controller.isLoading.value
+                              ? Image.asset(
+                                  'assets/images/bank.png',
+                                  width: 30.w,
+                                )
+                              : Image.network(
+                                  '${ApiProvider().baseUrl}/${controller.constants.firstWhere((element) => element.name == 'bankLogo').value}',
+                                  width: 30.w,
+                                ),
                           SizedBox(width: 8.dp),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller.bankNo.value,
+                                controller.isLoading.value
+                                    ? ''
+                                    : controller.constants
+                                        .firstWhere((element) =>
+                                            element.name == 'noRekening')
+                                        .value,
                                 style: CustomTextStyle.black14w600(),
                               ),
                               Text(
-                                'A.n ${controller.bankPerson.value}',
+                                'A.n ${controller.isLoading.value ? '' : controller.constants.firstWhere((element) => element.name == 'rekeningName').value}',
                                 style: CustomTextStyle.black12w400(),
                               ),
                             ],
@@ -92,7 +102,11 @@ class PaymentScreen extends GetView<PaymentController> {
                             child: InkWell(
                               onTap: () async {
                                 await Clipboard.setData(
-                                  ClipboardData(text: controller.bankNo.value),
+                                  ClipboardData(
+                                      text: controller.constants
+                                          .firstWhere((element) =>
+                                              element.name == 'noRekening')
+                                          .value),
                                 );
                                 Utils.showGetSnackbar(
                                     'Copied to clipboard!', true);

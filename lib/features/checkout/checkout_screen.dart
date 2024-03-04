@@ -2,6 +2,7 @@ import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/checkout/checkout_controller.dart';
 import 'package:sarmini_mbokdhe/widgets/custom_divider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../network/api_provider.dart';
 
@@ -14,127 +15,133 @@ class CheckoutScreen extends GetView<CheckoutController> {
       appBar: AppBar(
         title: const Text('Checkout'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              children: [
-                const CustomDivider(),
-                _buildAddress(),
-                const CustomDivider(),
-                ListTile(
-                  title: Row(
-                    children: [
-                      Text(
-                        'Ongkos kirim',
-                        style: CustomTextStyle.black(),
-                      ),
-                      const Spacer(),
-                      Obx(
-                        () => Text(
-                          controller.serviceFee.value,
-                          style: CustomTextStyle.black(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const CustomDivider(),
-                _buildProductItem(),
-                const CustomDivider(),
-                InkWell(
-                  onTap: _showVoucherBottomSheet,
-                  child: Padding(
-                    padding: EdgeInsets.all(16.dp),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.airplane_ticket_outlined,
-                            color: CustomColors.primaryColor),
-                        SizedBox(width: 16.dp),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              controller.selectedVoucher.value != null
-                                  ? 'Voucher yang dimasukan'
-                                  : 'Masukan Voucher',
-                              style: CustomTextStyle.primary(),
-                            ),
-                            Obx(
-                              () => controller.inputtedVoucher.value != null
-                                  ? Text(controller.inputtedVoucher.value!)
-                                  : const SizedBox(),
-                            )
-                          ],
-                        ),
-                        const Spacer(),
-                        const Icon(Icons.arrow_forward_ios,
-                            color: CustomColors.primaryColor)
-                      ],
-                    ),
-                  ),
-                ),
-                const CustomDivider(),
-                Padding(
-                  padding: EdgeInsets.all(16.dp),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.edit, color: CustomColors.primaryColor),
-                      SizedBox(width: 16.dp),
-                      Expanded(
-                        child: TextFormField(
-                          controller: controller.notesCtr,
-                          decoration: const InputDecoration(
-                              hintText: 'Catatan',
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const CustomDivider(),
-                _buildPayment(),
-              ],
-            ),
-          ),
-          const CustomDivider(),
-          Row(
+      body: Obx(
+        () => Skeletonizer(
+          enabled: controller.isLoading.value,
+          child: Column(
             children: [
               Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.dp),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Total pembayaran:'),
-                      Obx(
-                        () => Text(
-                          'Rp${Utils.numberFormat(controller.total.value)}',
-                          style: CustomTextStyle.primary14w600(),
+                child: ListView(
+                  children: [
+                    const CustomDivider(),
+                    _buildAddress(),
+                    const CustomDivider(),
+                    ListTile(
+                      title: Row(
+                        children: [
+                          Text(
+                            'Ongkos kirim',
+                            style: CustomTextStyle.black(),
+                          ),
+                          const Spacer(),
+                          Obx(
+                            () => Text(
+                              controller.serviceFee.value,
+                              style: CustomTextStyle.black(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const CustomDivider(),
+                    _buildProductItem(),
+                    const CustomDivider(),
+                    InkWell(
+                      onTap: _showVoucherBottomSheet,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.dp),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.airplane_ticket_outlined,
+                                color: CustomColors.primaryColor),
+                            SizedBox(width: 16.dp),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.selectedVoucher.value != null
+                                      ? 'Voucher yang dimasukan'
+                                      : 'Masukan Voucher',
+                                  style: CustomTextStyle.primary(),
+                                ),
+                                Obx(
+                                  () => controller.inputtedVoucher.value != null
+                                      ? Text(controller.inputtedVoucher.value!)
+                                      : const SizedBox(),
+                                )
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios,
+                                color: CustomColors.primaryColor)
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                    const CustomDivider(),
+                    Padding(
+                      padding: EdgeInsets.all(16.dp),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.edit,
+                              color: CustomColors.primaryColor),
+                          SizedBox(width: 16.dp),
+                          Expanded(
+                            child: TextFormField(
+                              controller: controller.notesCtr,
+                              decoration: const InputDecoration(
+                                  hintText: 'Catatan',
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    const CustomDivider(),
+                    _buildPayment(),
+                  ],
                 ),
               ),
-              Expanded(
-                child: Obx(
-                  () => CustomElevatedButton(
-                    text: 'Bayar',
-                    isLoading: controller.isBuyLoading.value,
-                    onPressed: () {
-                      controller.buy();
-                    },
-                    bgColor: CustomColors.primaryColor,
-                    borderRadius: 0,
+              const CustomDivider(),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.dp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Total pembayaran:'),
+                          Obx(
+                            () => Text(
+                              'Rp${Utils.numberFormat(controller.total.value)}',
+                              style: CustomTextStyle.primary14w600(),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: Obx(
+                      () => CustomElevatedButton(
+                        text: 'Bayar',
+                        isLoading: controller.isBuyLoading.value,
+                        onPressed: () {
+                          controller.buy();
+                        },
+                        bgColor: CustomColors.primaryColor,
+                        borderRadius: 0,
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

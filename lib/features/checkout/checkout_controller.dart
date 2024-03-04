@@ -14,6 +14,7 @@ import 'package:sarmini_mbokdhe/models/user_response.dart';
 import 'package:sarmini_mbokdhe/models/voucher_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../../models/constants.response.dart';
 import '../payment/payment_binding.dart';
 import '../payment/payment_screen.dart';
 
@@ -25,6 +26,7 @@ class CheckoutController extends BaseController {
   final voucherNode = FocusNode();
   final notesCtr = TextEditingController();
 
+  final constants = <ConstantsDatum>[].obs;
   final Rx<User?> user = Rx(null);
   final Rx<ProductDatum?> selectedProduct = Rx(null);
   final Rx<VoucherDatum?> selectedVoucher = Rx(null);
@@ -35,16 +37,27 @@ class CheckoutController extends BaseController {
   final total = 0.obs;
   final isBuyLoading = false.obs;
 
+  _getConstants() async {
+    isLoading(true);
+
+    try {
+      final constantsResponse = await ApiProvider().get(endpoint: '/constants');
+      final constants = ConstantsResponse.fromJson(constantsResponse);
+
+      this.constants(constants.data);
+      isLoading(false);
+    } catch (e) {
+      isLoading(false);
+      Utils.showGetSnackbar(e.toString(), false);
+    }
+  }
+
   _calculateFee() {
     final fromLat = double.parse(
-      homeController.constants
-          .firstWhere((element) => element.name == 'lat')
-          .value,
+      constants.firstWhere((element) => element.name == 'lat').value,
     );
     final fromLong = double.parse(
-      homeController.constants
-          .firstWhere((element) => element.name == 'long')
-          .value,
+      constants.firstWhere((element) => element.name == 'long').value,
     );
     final address = this.address.value;
     final toLat = double.parse(address!.lat);
@@ -53,8 +66,8 @@ class CheckoutController extends BaseController {
     final distance =
         Geolocator.distanceBetween(fromLat, fromLong, toLat, toLong) / 1000;
 
-    final maxDistance = homeController.constants
-        .firstWhere((element) => element.name == 'maxDistance');
+    final maxDistance =
+        constants.firstWhere((element) => element.name == 'maxDistance');
 
     if (distance > double.parse(maxDistance.value)) {
       Get.back();
@@ -62,9 +75,8 @@ class CheckoutController extends BaseController {
           'Pengiriman lebih dari ${maxDistance.value}km tidak didukung', false);
     }
 
-    final fee = homeController.constants
-        .firstWhere((element) => element.name == 'feePerKm')
-        .value;
+    final fee =
+        constants.firstWhere((element) => element.name == 'feePerKm').value;
     final feeInt = int.parse(fee);
 
     if (distance <= 1) {
@@ -254,6 +266,7 @@ class CheckoutController extends BaseController {
       address(homeController.addresses.first);
     }
 
+    await _getConstants();
     _calculateFee();
     _calculateTotal();
     super.onInit();
