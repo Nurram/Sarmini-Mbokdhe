@@ -128,10 +128,7 @@ class HomeWidget extends GetView<HomeController> {
                         binding: LoginBinding(),
                       );
                     } else {
-                      Get.to(
-                        () => const ChatListScreen(),
-                        binding: ChatListBinding(),
-                      );
+                      controller.goToChat();
                     }
                   },
                   child: Icon(

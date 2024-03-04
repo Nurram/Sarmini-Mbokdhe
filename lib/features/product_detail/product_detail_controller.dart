@@ -10,6 +10,8 @@ import 'package:sarmini_mbokdhe/models/province_response.dart';
 import 'package:sarmini_mbokdhe/models/regencies_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../chat_room/chat_room_binding.dart';
+import '../chat_room/chat_room_screen.dart';
 import '../checkout/checkout_binding.dart';
 import '../checkout/checkout_screen.dart';
 
@@ -29,6 +31,24 @@ class ProductDetailController extends BaseController {
   final isStockLoading = false.obs;
   final isStockAvailable = true.obs;
   final predictedFee = 0.obs;
+
+  goToChat() async {
+    final savedUser = await getCurrentLoggedInUser();
+    final user = savedUser.value!;
+
+    if (user.firstname != null &&
+        user.firstname!.isNotEmpty &&
+        user.lastname != null &&
+        user.lastname!.isNotEmpty) {
+      Get.to(
+        () => const ChatRoomScreen(),
+        binding: ChatRoomBinding(),
+        arguments: selectedProduct.value!.id,
+      );
+    } else {
+      Utils.showGetSnackbar('Silahkan lengkapi profil terlebih dahulu', false);
+    }
+  }
 
   predictFee() {
     Get.to(

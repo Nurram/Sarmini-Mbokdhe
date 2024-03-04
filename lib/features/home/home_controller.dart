@@ -10,6 +10,10 @@ import '../../models/constants.response.dart';
 import '../../models/product_response.dart';
 import '../../models/voucher_response.dart';
 import '../../widgets/address_bottom_sheet.dart';
+import '../chat_list/chat_list_binding.dart';
+import '../chat_list/chat_list_screen.dart';
+import '../chat_room/chat_room_binding.dart';
+import '../chat_room/chat_room_screen.dart';
 
 class HomeController extends BaseController {
   final Rx<AddressDatum?> selectedAddress = Rx(null);
@@ -20,6 +24,23 @@ class HomeController extends BaseController {
   final categories = <CategoryDatum>[].obs;
   final products = <ProductDatum>[].obs;
   final constants = <ConstantsDatum>[].obs;
+
+  goToChat() async {
+    final savedUser = await getCurrentLoggedInUser();
+    final user = savedUser.value!;
+
+    if (user.firstname != null &&
+        user.firstname!.isNotEmpty &&
+        user.lastname != null &&
+        user.lastname!.isNotEmpty) {
+      Get.to(
+        () => const ChatListScreen(),
+        binding: ChatListBinding(),
+      );
+    } else {
+      Utils.showGetSnackbar('Silahkan lengkapi profil terlebih dahulu', false);
+    }
+  }
 
   setSelectedAddress({required int id}) async {
     if (selectedAddress.value!.id != id) {

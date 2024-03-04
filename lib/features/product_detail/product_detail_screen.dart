@@ -55,11 +55,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                   color: CustomColors.primaryColor,
                 ),
                 onTap: () {
-                  Get.to(
-                    () => const ChatRoomScreen(),
-                    binding: ChatRoomBinding(),
-                    arguments: controller.selectedProduct.value!.id,
-                  );
+                  controller.goToChat();
                 },
               ),
               Container(
