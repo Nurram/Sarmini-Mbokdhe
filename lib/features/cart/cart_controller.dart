@@ -106,6 +106,9 @@ class CartController extends BaseController {
       }
 
       await ApiProvider().delete(endpoint: '/cart', body: {'ids': ids});
+      final cartCount = Get.find<HomeController>().cartCount.value;
+      Get.find<HomeController>().cartCount(cartCount - 1);
+
       await getCarts();
     } catch (e) {
       isLoading(false);

@@ -171,6 +171,10 @@ class ProductDetailController extends BaseController {
             'productId': selectedProduct.value!.id
           },
         );
+
+        final cartCount = Get.find<HomeController>().cartCount.value;
+        Get.find<HomeController>().getCarts();
+
         Utils.showGetSnackbar('Ditambahkan ke cart!', true);
       } else {
         throw 'Tidak dapat menambhkan ke cart';

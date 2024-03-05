@@ -212,7 +212,7 @@ class HomeWidget extends GetView<HomeController> {
                           ),
                           child: Center(
                             child: Text(
-                              controller.chatCount.value.toString(),
+                              controller.cartCount.value.toString(),
                               maxLines: 1,
                               style: TextStyle(
                                 fontSize: 8.dp,

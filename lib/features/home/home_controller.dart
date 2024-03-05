@@ -6,6 +6,7 @@ import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
+import '../../models/cart_response.dart';
 import '../../models/category_response.dart';
 import '../../models/chat_list_response.dart';
 import '../../models/constants.response.dart';
@@ -28,6 +29,7 @@ class HomeController extends BaseController {
   final constants = <ConstantsDatum>[].obs;
 
   final chatCount = 0.obs;
+  final cartCount = 0.obs;
 
   _getUnread() async {
     isLoading(true);
@@ -41,6 +43,25 @@ class HomeController extends BaseController {
 
       final ureadData = ChatListResponse.fromJson(response);
       chatCount(ureadData.data.length);
+
+      isLoading(false);
+    } catch (e) {
+      isLoading(false);
+      Utils.showGetSnackbar(e.toString(), false);
+    }
+  }
+
+  getCarts() async {
+    isLoading(true);
+
+    try {
+      final user = await getCurrentLoggedInUser();
+      final userData = user.value;
+
+      final cartResponse = await ApiProvider()
+          .post(endpoint: '/cart', body: {'userId': userData!.id});
+      final cart = CartResponse.fromJson(cartResponse);
+      cartCount(cart.data.length);
 
       isLoading(false);
     } catch (e) {
@@ -83,7 +104,7 @@ class HomeController extends BaseController {
         },
       );
 
-      await _pusher.subscribe(channelName: 'chat.all');
+      await _pusher.subscribe(channelName: 'chat');
       await _pusher.connect();
       print('Done');
     } catch (e) {
@@ -178,6 +199,7 @@ class HomeController extends BaseController {
 
       await getConstants();
       await _getUnread();
+      await getCarts();
 
       isLoading(false);
     } catch (e) {
