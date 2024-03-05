@@ -69,20 +69,20 @@ class ChatListScreen extends GetView<ChatListController> {
                   maxLines: 1,
                   style: CustomTextStyle.black(),
                 ),
-                SizedBox(height: 4.dp),
-                Text(
-                  chat.message,
-                  maxLines: 1,
-                  style: CustomTextStyle.grey12w400(),
-                )
+                // SizedBox(height: 4.dp),
+                // Text(
+                //   chat.message,
+                //   maxLines: 1,
+                //   style: CustomTextStyle.grey12w400(),
+                // )
               ],
             ),
           ),
-          SizedBox(width: 8.dp),
-          Text(
-            Utils.formatDate(pattern: 'HH:mm', date: chat.createdAt),
-            style: CustomTextStyle.grey10w400(),
-          )
+          // SizedBox(width: 8.dp),
+          // Text(
+          //   Utils.formatDate(pattern: 'HH:mm', date: chat.createdAt),
+          //   style: CustomTextStyle.grey10w400(),
+          // )
         ],
       ),
     );
