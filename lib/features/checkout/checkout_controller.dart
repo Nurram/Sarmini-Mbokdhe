@@ -154,18 +154,17 @@ class CheckoutController extends BaseController {
           endpoint: '/products/detail',
           body: {'id': selectedProduct.value!.id});
       final detail = ProductDatum.fromJson(detailResponse['data']);
-      print('HERE');
+
       if (detail.stock < detailController.qty.value) {
         throw 'Stock tidak cukup / telah habis';
       }
-      print('HERE 1');
+
       final user = await getCurrentLoggedInUser();
-      print('HERE 2');
+
       final userData =
           await ApiProvider().post(endpoint: '/users/detail', body: {
         'userId': user.value!.id,
       });
-      print('HERE 3');
 
       final userResponse = UserResponse.fromJson(userData).user;
       await setCurrentLoggedInUser(userResponse);
@@ -197,14 +196,14 @@ class CheckoutController extends BaseController {
         voucherAmount: selectedVoucher.value?.amount,
         notes: notesCtr.text,
       );
-      print('ADD');
+      
       final response = await ApiProvider().post(
         endpoint: '/orders/add',
         body: request.toJson(),
       );
 
       if (selectedPayment.value == 'Transfer') {
-        print(jsonEncode(response['data']));
+
         Get.off(
           () => const PaymentScreen(),
           binding: PaymentBinding(),
@@ -220,12 +219,11 @@ class CheckoutController extends BaseController {
           }
         }
 
-        print('REDUCE');
         await ApiProvider().post(endpoint: '/products/reduceStock', body: {
           'productId': selectedProduct.value!.id,
           'qty': detailController.qty.value,
         });
-        print('DECUST');
+
         final response =
             await ApiProvider().post(endpoint: '/users/deduct', body: {
           'userId': user.value!.id,

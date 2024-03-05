@@ -213,7 +213,7 @@ class CheckoutCartController extends BaseController {
     final products = <Map<String, dynamic>>[];
 
     for (var element in carts) {
-      products.add({'productId': element.id, 'qty': element.cartQty});
+      products.add({'productId': element.productId, 'qty': element.cartQty});
     }
 
     final request = OrderRequest(

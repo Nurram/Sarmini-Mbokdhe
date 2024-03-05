@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/cart/cart_binding.dart';
@@ -131,33 +132,97 @@ class HomeWidget extends GetView<HomeController> {
                       controller.goToChat();
                     }
                   },
-                  child: Icon(
-                    Icons.chat_outlined,
-                    size: 20.dp,
-                    color: CustomColors.primaryColor,
+                  child: Obx(
+                    () => Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.dp),
+                          child: Icon(
+                            Icons.chat_outlined,
+                            size: 20.dp,
+                            color: CustomColors.primaryColor,
+                          ),
+                        ),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 13.dp,
+                            height: 14.dp,
+                            padding: EdgeInsets.all(2.dp),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                controller.chatCount.value.toString(),
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 8.dp,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(width: 16.dp),
-                InkWell(
-                  onTap: () async {
-                    final loggedIn = await controller.checkLoggedIn();
+                Obx(
+                  () => Stack(
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          final loggedIn = await controller.checkLoggedIn();
 
-                    if (!loggedIn) {
-                      Get.to(
-                        () => const LoginScreen(),
-                        binding: LoginBinding(),
-                      );
-                    } else {
-                      Get.to(
-                        () => const CartScreen(),
-                        binding: CartBinding(),
-                      );
-                    }
-                  },
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 20.dp,
-                    color: CustomColors.primaryColor,
+                          if (!loggedIn) {
+                            Get.to(
+                              () => const LoginScreen(),
+                              binding: LoginBinding(),
+                            );
+                          } else {
+                            Get.to(
+                              () => const CartScreen(),
+                              binding: CartBinding(),
+                            );
+                          }
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 4.dp),
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            size: 20.dp,
+                            color: CustomColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          width: 13.dp,
+                          height: 14.dp,
+                          padding: EdgeInsets.all(2.dp),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              controller.chatCount.value.toString(),
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 8.dp,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ],

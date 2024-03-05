@@ -1,21 +1,23 @@
 import 'dart:convert';
 
 import 'package:flutter_sizer/flutter_sizer.dart';
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/models/address_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
 import '../../models/category_response.dart';
+import '../../models/chat_list_response.dart';
 import '../../models/constants.response.dart';
 import '../../models/product_response.dart';
 import '../../models/voucher_response.dart';
 import '../../widgets/address_bottom_sheet.dart';
 import '../chat_list/chat_list_binding.dart';
 import '../chat_list/chat_list_screen.dart';
-import '../chat_room/chat_room_binding.dart';
-import '../chat_room/chat_room_screen.dart';
 
 class HomeController extends BaseController {
+  final PusherChannelsFlutter _pusher = PusherChannelsFlutter.getInstance();
+
   final Rx<AddressDatum?> selectedAddress = Rx(null);
   final selectedAddressId = (-1).obs;
 
@@ -24,6 +26,70 @@ class HomeController extends BaseController {
   final categories = <CategoryDatum>[].obs;
   final products = <ProductDatum>[].obs;
   final constants = <ConstantsDatum>[].obs;
+
+  final chatCount = 0.obs;
+
+  _getUnread() async {
+    isLoading(true);
+
+    try {
+      final user = await getCurrentLoggedInUser();
+      final userData = user.value;
+
+      final response = await ApiProvider()
+          .post(endpoint: '/chats/unread', body: {'userId': userData!.id});
+
+      final ureadData = ChatListResponse.fromJson(response);
+      chatCount(ureadData.data.length);
+
+      isLoading(false);
+    } catch (e) {
+      isLoading(false);
+      Utils.showGetSnackbar(e.toString(), false);
+    }
+  }
+
+  _initPusher() async {
+    final user = await getCurrentLoggedInUser();
+    final userData = user.value;
+
+    try {
+      await _pusher.init(
+        apiKey: '31351825d1cffa1d493b',
+        cluster: 'ap1',
+        useTLS: true,
+        onError: (message, code, error) {
+          print('Error: $error');
+        },
+        onEvent: (event) {
+          try {
+            final datum = ChatListDatum.fromJson(
+              jsonDecode(event.data)['chat'],
+            );
+
+            if (datum.senderId != userData!.id && datum.userId == userData.id) {
+              chatCount(chatCount.value + 1);
+            }
+          } catch (e) {
+            print(e);
+          }
+        },
+        onSubscriptionError: (message, error) {
+          print('Subs Error: ${message}, Error: ${error}');
+        },
+        onSubscriptionSucceeded: (channelName, data) {
+          data as Map;
+          print('Subs Succeed: $channelName: $data');
+        },
+      );
+
+      await _pusher.subscribe(channelName: 'chat.all');
+      await _pusher.connect();
+      print('Done');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   goToChat() async {
     final savedUser = await getCurrentLoggedInUser();
@@ -111,6 +177,7 @@ class HomeController extends BaseController {
       );
 
       await getConstants();
+      await _getUnread();
 
       isLoading(false);
     } catch (e) {
@@ -176,7 +243,15 @@ class HomeController extends BaseController {
     //   selectedAddressId(selectedAddress.value!.id);
     // }
 
+    await _initPusher();
     await getDatas();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    _pusher.disconnect();
+    _pusher.unsubscribe(channelName: 'chat.all');
+    super.dispose();
   }
 }
