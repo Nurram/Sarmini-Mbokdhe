@@ -6,6 +6,7 @@ import 'package:sarmini_mbokdhe/network/interceptor.dart';
 
 class ApiProvider {
   final baseUrl = 'http://admin.sarminimbokdhe.com';
+  // final baseUrl = 'http://10.0.2.2:8000';
   final headers = {
     'Connection': 'Keep-Alive',
     'Accept': 'application/json',

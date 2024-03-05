@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:sarmini_mbokdhe/core_imports.dart';
 import 'package:sarmini_mbokdhe/features/chat_list/chat_list_controller.dart';
+import 'package:sarmini_mbokdhe/features/home/home_controller.dart';
 import 'package:sarmini_mbokdhe/models/chat_list_response.dart';
 import 'package:sarmini_mbokdhe/network/api_provider.dart';
 
@@ -25,6 +26,14 @@ class ChatRoomController extends BaseController {
           body: {'userId': userId, 'productId': productId});
       final chatResponse = ChatListResponse.fromJson(response);
       chats(chatResponse.data);
+
+      final updateResponse = await ApiProvider().post(
+          endpoint: '/chats/setRead',
+          body: {'userId': userId, 'productId': productId});
+
+      final homeCtr = Get.find<HomeController>();
+      final count = homeCtr.chatCount.value;
+      homeCtr.chatCount(count - updateResponse['data']['affectedCount'] as int);
 
       _scrollToBottom();
       isLoading(false);
@@ -111,6 +120,14 @@ class ChatRoomController extends BaseController {
     _scrollToBottom();
 
     super.onInit();
+  }
+
+  @override
+  InternalFinalCallback<void> get onDelete {
+    _pusher.disconnect();
+    _pusher.unsubscribe(channelName: channelName);
+
+    return super.onDelete;
   }
 
   @override
