@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../core_imports.dart';
 
 class Utils {
@@ -108,18 +110,18 @@ class Utils {
 
   static Future<void> storeToSecureStorage(
       {required String key, required String data}) async {
-    const storage = FlutterSecureStorage();
-    await storage.write(key: key, value: data);
+    final storage = await SharedPreferences.getInstance();
+    await storage.setString(key, data);
   }
 
   static Future<String?> readFromSecureStorage({required String key}) async {
-    const storage = FlutterSecureStorage();
-    return await storage.read(key: key);
+    final storage = await SharedPreferences.getInstance();
+    return storage.getString(key);
   }
 
   static Future clearSecureStorage() async {
-    const storage = FlutterSecureStorage();
-    await storage.deleteAll();
+    final storage = await SharedPreferences.getInstance();
+    await storage.clear();
   }
 
   static bool isPasswordFormatValid({required String password}) {

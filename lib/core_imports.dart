@@ -17,4 +17,3 @@ export 'package:get/get.dart' hide FormData, MultipartFile, Response;
 export 'package:intl/intl.dart' hide TextDirection;
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:get/get_state_manager/src/simple/get_controllers.dart';
-export 'package:flutter_secure_storage/flutter_secure_storage.dart';
