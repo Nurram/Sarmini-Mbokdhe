@@ -71,9 +71,6 @@ class HomeController extends BaseController {
   }
 
   _initPusher() async {
-    final user = await getCurrentLoggedInUser();
-    final userData = user.value;
-
     try {
       await _pusher.init(
         apiKey: '31351825d1cffa1d493b',
@@ -82,13 +79,17 @@ class HomeController extends BaseController {
         onError: (message, code, error) {
           print('Error: $error');
         },
-        onEvent: (event) {
+        onEvent: (event) async {
           try {
             final datum = ChatListDatum.fromJson(
               jsonDecode(event.data)['chat'],
             );
 
-            if (datum.senderId != userData!.id && datum.userId == userData.id) {
+            final user = await getCurrentLoggedInUser();
+            final userData = user.value;
+            final userId = userData != null ? userData!.id : -1;
+
+            if (datum.senderId != userId && datum.userId == userId) {
               chatCount(chatCount.value + 1);
             }
           } catch (e) {
@@ -178,6 +179,8 @@ class HomeController extends BaseController {
     try {
       if (userController.loggedInUser.value != null) {
         await getAddress();
+        await _getUnread();
+        await getCarts();
       }
 
       final voucherResult = await ApiProvider().get(endpoint: '/vouchers');
@@ -198,8 +201,6 @@ class HomeController extends BaseController {
       );
 
       await getConstants();
-      await _getUnread();
-      await getCarts();
 
       isLoading(false);
     } catch (e) {
